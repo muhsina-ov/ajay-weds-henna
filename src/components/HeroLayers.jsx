@@ -4,13 +4,13 @@ import { HeroParallaxLayer } from './Parallax'
 const LAYERS = '/assets/hero-layers'
 
 export const HERO_LAYERS = {
-  skyWater: `${LAYERS}/hero-layer-sky-water.png`,
-  church: `${LAYERS}/hero-layer-church.png`,
-  palmsBirds: `${LAYERS}/hero-layer-palms-birds.png`,
-  floralTopLeft: `${LAYERS}/hero-layer-floral-tl.png`,
-  floralBottomRight: `${LAYERS}/hero-layer-floral-br.png`,
-  floralAccents: `${LAYERS}/hero-layer-floral-accents.png`,
-  coupleCutout: `${LAYERS}/couple-hero-cutout.png`,
+  skyWater: `${LAYERS}/hero-layer-sky-water.webp`,
+  church: `${LAYERS}/hero-layer-church.webp`,
+  palmsBirds: `${LAYERS}/hero-layer-palms-birds.webp`,
+  floralTopLeft: `${LAYERS}/hero-layer-floral-tl.webp`,
+  floralBottomRight: `${LAYERS}/hero-layer-floral-br.webp`,
+  floralAccents: `${LAYERS}/hero-layer-floral-accents.webp`,
+  coupleCutout: `${LAYERS}/couple-hero-cutout.webp`,
 }
 
 export const LAYER_SPEED = {

@@ -14,17 +14,17 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="hero" aria-labelledby="wedding-title">
-      <AnimatedAsset className="hero-floral hero-floral-one" src="/assets/florals/grand-corner.png" from="left" delay={0.05} drift={8} rotate={0.8} duration={8} />
-      <AnimatedAsset className="hero-floral hero-floral-two" src="/assets/florals/grand-corner.png" from="right" delay={0.18} drift={10} rotate={1} duration={9} />
-      <AnimatedAsset className="hero-spray hero-spray-one" src="/assets/florals/side-spray.png" from="top" delay={0.28} drift={12} rotate={1.5} duration={7.5} />
-      <AnimatedAsset className="hero-spray hero-spray-two" src="/assets/florals/side-spray.png" from="bottom" delay={0.36} drift={10} rotate={1.2} duration={8.5} />
-      <AnimatedAsset className="hero-silk" src="/assets/florals/silk-ribbon.png" from="bottom" delay={0.42} drift={14} rotate={0.7} duration={10} />
+      <AnimatedAsset className="hero-floral hero-floral-one" src="/assets/florals/grand-corner.webp" from="left" delay={0.05} drift={8} rotate={0.8} duration={8} />
+      <AnimatedAsset className="hero-floral hero-floral-two" src="/assets/florals/grand-corner.webp" from="right" delay={0.18} drift={10} rotate={1} duration={9} />
+      <AnimatedAsset className="hero-spray hero-spray-one" src="/assets/florals/side-spray.webp" from="top" delay={0.28} drift={12} rotate={1.5} duration={7.5} />
+      <AnimatedAsset className="hero-spray hero-spray-two" src="/assets/florals/side-spray.webp" from="bottom" delay={0.36} drift={10} rotate={1.2} duration={8.5} />
+      <AnimatedAsset className="hero-silk" src="/assets/florals/silk-ribbon.webp" from="bottom" delay={0.42} drift={14} rotate={0.7} duration={10} />
 
       <motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
         <div className="hero-frame" aria-hidden="true" />
         <motion.div {...reveal} transition={{ duration: 0.8 }} className="crest-wrap">
           <motion.img
-            src="/assets/florals/crest-monogram.png"
+            src="/assets/florals/crest-monogram.webp"
             alt="Ajay and Henna Monogram"
             className="crest-emblem-img"
             animate={reduceMotion ? undefined : { scale: [1, 1.025, 1] }}
@@ -60,7 +60,7 @@ export default function Hero() {
         transition={{ duration: 1, delay: 0.2 }}
         style={reduceMotion ? undefined : { scale: portraitScale, y: portraitY }}
       >
-        <img src="/assets/hero-couple.jpg" alt={`${COUPLE.groom} and ${COUPLE.bride} together`} fetchPriority="high" />
+        <img src="/assets/hero-couple.webp" alt={`${COUPLE.groom} and ${COUPLE.bride} together`} fetchPriority="high" />
       </motion.figure>
     </section>
   )

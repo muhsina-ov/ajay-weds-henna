@@ -131,7 +131,7 @@ img { display: block; max-width: 100%; }
   inset: 0;
   border-radius: 4px;
   overflow: hidden;
-  background: #f1f6fb url('/assets/decorations/parchment-texture.png') center / cover;
+  background: #f1f6fb url('/assets/decorations/parchment-texture.webp') center / cover;
   border: 1px solid rgba(197, 160, 89, 0.35);
   box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.8), inset 0 0 20px rgba(11, 59, 114, 0.08);
 }
@@ -139,7 +139,7 @@ img { display: block; max-width: 100%; }
 .envelope-inner-liner {
   position: absolute;
   inset: 0;
-  background: url('/assets/decorations/envelope-liner.jpg') center / cover;
+  background: url('/assets/decorations/envelope-liner.webp') center / cover;
   opacity: 0.92;
 }
 
@@ -162,7 +162,7 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f4f8fc 60%, #e8f2f8 100%), url('/assets/decorations/parchment-texture.png') center / cover;
+  background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f4f8fc 60%, #e8f2f8 100%), url('/assets/decorations/parchment-texture.webp') center / cover;
   border-radius: 4px;
   box-shadow: 0 10px 38px rgba(6, 41, 79, 0.22), 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 1.8rem 1.2rem 1.4rem;
@@ -489,7 +489,7 @@ img { display: block; max-width: 100%; }
 .hero-portrait::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(238, 245, 250, 0.92), transparent 24%), linear-gradient(180deg, transparent 65%, rgba(9, 45, 83, 0.3)); pointer-events: none; }
 .hero-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 52% center; filter: saturate(0.78) contrast(0.96); }
 
-.occasion-section { position: relative; overflow: hidden; padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 6vw, 6rem); background: linear-gradient(rgba(247, 249, 251, 0.93), rgba(247, 249, 251, 0.93)), url('/assets/decorations/parchment-texture.png') center / cover; }
+.occasion-section { position: relative; overflow: hidden; padding: clamp(6rem, 10vw, 10rem) clamp(1.25rem, 6vw, 6rem); background: linear-gradient(rgba(247, 249, 251, 0.93), rgba(247, 249, 251, 0.93)), url('/assets/decorations/parchment-texture.webp') center / cover; }
 .occasion-floral { position: absolute; z-index: 0; width: min(22rem, 26vw); opacity: 0.22; pointer-events: none; }
 .occasion-floral-left { top: 3rem; left: -8rem; transform: rotate(-12deg); }
 .occasion-floral-right { top: 34%; right: -9rem; transform: scaleX(-1) rotate(-8deg); }

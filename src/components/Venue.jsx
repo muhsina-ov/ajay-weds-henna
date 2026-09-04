@@ -31,7 +31,7 @@ export default function Venue() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <div className="p-5" style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.png)', backgroundSize: 'cover' }}>
+          <div className="p-5" style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.webp)', backgroundSize: 'cover' }}>
             <h3 className="font-display text-xs tracking-[0.15em] text-navy uppercase font-semibold mb-1">
               {VENUE.name}
             </h3>
@@ -58,7 +58,7 @@ export default function Venue() {
           <motion.button
             onClick={generateICS}
             className="touch-target flex items-center justify-center gap-2 w-full py-3.5 rounded-sm font-display text-[11px] tracking-[0.2em] uppercase text-navy gold-border transition-transform active:scale-[0.97]"
-            style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.png)', backgroundSize: 'cover' }}
+            style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.webp)', backgroundSize: 'cover' }}
             whileTap={{ scale: 0.97 }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">

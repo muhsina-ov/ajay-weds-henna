@@ -40,7 +40,7 @@ export default function Countdown() {
   return (
     <section
       className="relative py-16 px-6"
-      style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.png)', backgroundSize: 'cover' }}
+      style={{ backgroundImage: 'url(/assets/decorations/parchment-texture.webp)', backgroundSize: 'cover' }}
     >
       <motion.div
         initial={{ opacity: 0, y: 40 }}

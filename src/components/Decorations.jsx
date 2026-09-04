@@ -1,14 +1,14 @@
 const BASE = '/assets/decorations'
 
 export const ASSETS = {
-  floralTopLeft: `${BASE}/floral-top-left.png`,
-  floralBottomRight: `${BASE}/floral-bottom-right.png`,
-  ornamentHeader: `${BASE}/ornament-header.png`,
-  ornamentDivider: `${BASE}/ornament-divider.png`,
-  ornamentDate: `${BASE}/ornament-date.png`,
-  heartGold: `${BASE}/heart-gold.png`,
-  cornerFlourish: `${BASE}/corner-flourish.png`,
-  parchmentTexture: `${BASE}/parchment-texture.png`,
+  floralTopLeft: `${BASE}/floral-top-left.webp`,
+  floralBottomRight: `${BASE}/floral-bottom-right.webp`,
+  ornamentHeader: `${BASE}/ornament-header.webp`,
+  ornamentDivider: `${BASE}/ornament-divider.webp`,
+  ornamentDate: `${BASE}/ornament-date.webp`,
+  heartGold: `${BASE}/heart-gold.webp`,
+  cornerFlourish: `${BASE}/corner-flourish.webp`,
+  parchmentTexture: `${BASE}/parchment-texture.webp`,
 }
 
 export function FloralTopLeft({ className = '' }) {

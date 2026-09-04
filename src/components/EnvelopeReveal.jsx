@@ -121,10 +121,10 @@ export default function EnvelopeReveal({ onOpen }) {
           exit={{ opacity: 0, scale: 1.03, filter: 'blur(8px)' }}
           transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
-          <img className="gate-floral gate-floral-left" src="/assets/florals/grand-corner.png" alt="" />
-          <img className="gate-floral gate-floral-right" src="/assets/florals/grand-corner.png" alt="" />
-          <img className="gate-wreath" src="/assets/florals/open-wreath.png" alt="" />
-          <img className="gate-silk" src="/assets/florals/silk-ribbon.png" alt="" />
+          <img className="gate-floral gate-floral-left" src="/assets/florals/grand-corner.webp" alt="" />
+          <img className="gate-floral gate-floral-right" src="/assets/florals/grand-corner.webp" alt="" />
+          <img className="gate-wreath" src="/assets/florals/open-wreath.webp" alt="" />
+          <img className="gate-silk" src="/assets/florals/silk-ribbon.webp" alt="" />
 
           <div className="envelope-scene">
             <motion.button
@@ -169,7 +169,7 @@ export default function EnvelopeReveal({ onOpen }) {
                 {/* Crest Monogram */}
                 <div className="card-crest-wrap">
                   <img
-                    src="/assets/florals/crest-monogram.png"
+                    src="/assets/florals/crest-monogram.webp"
                     alt="Ajay and Henna Monogram"
                     className="card-crest-img"
                   />
@@ -211,7 +211,7 @@ export default function EnvelopeReveal({ onOpen }) {
                 <defs>
                   {/* Subtle paper texture overlay */}
                   <pattern id="pocketPaperPattern" width="260" height="260" patternUnits="userSpaceOnUse">
-                    <image href="/assets/decorations/parchment-texture.png" width="260" height="260" preserveAspectRatio="none" opacity="0.32" />
+                    <image href="/assets/decorations/parchment-texture.webp" width="260" height="260" preserveAspectRatio="none" opacity="0.32" />
                   </pattern>
 
                   {/* Gold Foil Crease Gradient */}
@@ -293,7 +293,7 @@ export default function EnvelopeReveal({ onOpen }) {
                     <svg viewBox="0 0 540 200" preserveAspectRatio="none" className="flap-svg">
                       <defs>
                         <pattern id="topPaperPattern" width="260" height="260" patternUnits="userSpaceOnUse">
-                          <image href="/assets/decorations/parchment-texture.png" width="260" height="260" preserveAspectRatio="none" opacity="0.3" />
+                          <image href="/assets/decorations/parchment-texture.webp" width="260" height="260" preserveAspectRatio="none" opacity="0.3" />
                         </pattern>
                         <linearGradient id="topFlapGrad" x1="50%" y1="0%" x2="50%" y2="100%">
                           <stop offset="0%" stopColor="#ffffff" />
@@ -319,7 +319,7 @@ export default function EnvelopeReveal({ onOpen }) {
                     <svg viewBox="0 0 540 200" preserveAspectRatio="none" className="flap-svg-back">
                       <defs>
                         <pattern id="linerPattern" width="240" height="240" patternUnits="userSpaceOnUse">
-                          <image href="/assets/decorations/envelope-liner.jpg" width="240" height="240" preserveAspectRatio="xMidYMid slice" opacity="0.96" />
+                          <image href="/assets/decorations/envelope-liner.webp" width="240" height="240" preserveAspectRatio="xMidYMid slice" opacity="0.96" />
                         </pattern>
                       </defs>
                       {/* Back paper substrate */}
@@ -351,7 +351,7 @@ export default function EnvelopeReveal({ onOpen }) {
                   }
                 >
                   <img
-                    src="/assets/decorations/wax-seal-royale.png"
+                    src="/assets/decorations/wax-seal-royale.webp"
                     alt="Royal Wax Seal"
                     className="wax-seal-img"
                     draggable={false}
