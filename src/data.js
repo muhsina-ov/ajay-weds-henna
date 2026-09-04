@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://ajay-henna.vercel.app'
+export const SITE_URL = 'https://ajay-weds-henna.vercel.app'
 
 export const COUPLE = {
   groom: 'Ajay Babu',
@@ -93,7 +93,7 @@ export function generateICS() {
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url
-  anchor.download = 'ajay-henna-wedding.ics'
+  anchor.download = 'ajay-weds-henna.ics'
   anchor.click()
   URL.revokeObjectURL(url)
 }

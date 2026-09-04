@@ -1,216 +1,176 @@
 #!/usr/bin/env python3
 import os
-import math
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-os.makedirs('invitation/public/assets', exist_ok=True)
-os.makedirs('invitation/public', exist_ok=True)
-
-OG_WIDTH = 1200
-OG_HEIGHT = 630
+W, H = 1200, 630
 
 # Luxury Color Palette
-COLOR_CREAM = (253, 248, 241)        # #FDF8F1
-COLOR_CREAM_CARD = (255, 253, 249)   # #FFFAF4
-COLOR_NAVY = (26, 54, 93)            # #1A365D
-COLOR_NAVY_DEEP = (15, 36, 64)       # #0F2440
-COLOR_GOLD = (184, 134, 11)          # #B8860B
-COLOR_GOLD_LIGHT = (197, 160, 89)    # #C5A059
-COLOR_GOLD_PALE = (212, 175, 55)     # #D4AF37
-COLOR_GOLD_ACCENT = (218, 165, 32)
-COLOR_TEXT_MUTED = (90, 102, 118)
+BG_COLOR = (250, 248, 244)       # Warm luxury parchment
+NAVY_INK = (11, 59, 114)          # Royal Navy #0B3B72
+NAVY_DEEP = (6, 41, 79)           # Deep Navy #06294F
+GOLD_ACCENT = (197, 160, 89)      # Antique Gold #C5A059
+GOLD_LINE = (212, 175, 55)        # Fine Metallic Gold #D4AF37
+TEXT_MUTED = (95, 115, 135)       # Elegant Slate
 
-FONT_DIDOT_BOLD = '/System/Library/Fonts/Supplemental/Didot.ttc'
-FONT_BASKERVILLE_BOLD = '/System/Library/Fonts/Supplemental/Baskerville.ttc'
-FONT_GEORGIA_BOLD = '/System/Library/Fonts/Supplemental/Georgia Bold.ttf'
-FONT_GEORGIA_ITALIC = '/System/Library/Fonts/Supplemental/Georgia Italic.ttf'
-FONT_GEORGIA = '/System/Library/Fonts/Supplemental/Georgia.ttf'
-FONT_OPTIMA_BOLD = '/System/Library/Fonts/Optima.ttc'
-FONT_SNELL = '/System/Library/Fonts/Supplemental/SnellRoundhand.ttc'
+# Load Fonts
+FONT_CINZEL = 'fonts_cache/Cinzel.ttf'
+FONT_PLAYFAIR = 'fonts_cache/PlayfairDisplay.ttf'
+FONT_SCRIPT = 'fonts_cache/GreatVibes-Regular.ttf'
 
-def get_font(path, size, index=0):
-    try:
-        return ImageFont.truetype(path, size, index=index)
-    except Exception:
-        return ImageFont.load_default()
+font_cinzel_lg = ImageFont.truetype(FONT_CINZEL, 40)
+font_cinzel_md = ImageFont.truetype(FONT_CINZEL, 24)
+font_cinzel_sm = ImageFont.truetype(FONT_CINZEL, 13)
+font_cinzel_xs = ImageFont.truetype(FONT_CINZEL, 11)
+font_script = ImageFont.truetype(FONT_SCRIPT, 40)
+font_playfair = ImageFont.truetype(FONT_PLAYFAIR, 16)
+font_url = ImageFont.truetype(FONT_PLAYFAIR, 15)
 
-def draw_tracked_text(draw, y, text, font, fill, letter_spacing=2, width=OG_WIDTH, x_offset=0):
-    """Draw text with custom letter spacing centered within a container."""
-    # Measure each character and spacing
-    chars = list(text)
-    total_w = 0
-    char_widths = []
-    for c in chars:
-        bbox = draw.textbbox((0, 0), c, font=font)
-        cw = bbox[2] - bbox[0]
-        char_widths.append(cw)
-        total_w += cw
-    total_w += letter_spacing * (len(chars) - 1)
+def build_og_image(photo_path, crop_box, output_path):
+    canvas = Image.new('RGBA', (W, H), BG_COLOR)
     
-    start_x = x_offset + (width - total_w) / 2
-    cur_x = start_x
-    for i, c in enumerate(chars):
-        draw.text((cur_x, y), c, font=font, fill=fill)
-        cur_x += char_widths[i] + letter_spacing
-    return y
+    # 1. Parchment texture overlay
+    parch_path = 'invitation/public/assets/decorations/parchment-texture.png'
+    if os.path.exists(parch_path):
+        parch = Image.open(parch_path).convert('RGBA').resize((W, H), Image.Resampling.LANCZOS)
+        canvas = Image.blend(canvas, parch, 0.22)
 
-def draw_text_centered(draw, y, text, font, fill, width=OG_WIDTH, x_offset=0):
-    bbox = draw.textbbox((0, 0), text, font=font)
-    w = bbox[2] - bbox[0]
-    h = bbox[3] - bbox[1]
-    x = x_offset + (width - w) / 2
-    draw.text((x, y), text, font=font, fill=fill)
-    return y + h
+    draw = ImageDraw.Draw(canvas)
 
-def draw_gold_frame(draw, x0, y0, x1, y1, radius=20):
-    # Outer gold line
-    draw.rounded_rectangle([x0, y0, x1, y1], radius=radius, outline=COLOR_GOLD_LIGHT, width=2)
-    # Inner thin line
-    draw.rounded_rectangle([x0 + 4, y0 + 4, x1 - 4, y1 - 4], radius=max(0, radius - 3), outline=COLOR_GOLD_PALE, width=1)
+    # 2. Double Gold Outer Border
+    draw.rounded_rectangle([18, 18, W - 18, H - 18], radius=14, outline=GOLD_ACCENT, width=2)
+    draw.rounded_rectangle([24, 24, W - 24, H - 24], radius=10, outline=GOLD_LINE, width=1)
 
-def generate_primary_og_image():
-    # Base canvas
-    canvas = Image.new('RGBA', (OG_WIDTH, OG_HEIGHT), COLOR_CREAM)
-    
-    # Parchment background texture
-    parchment_path = 'invitation/public/assets/decorations/parchment-texture.png'
-    if os.path.exists(parchment_path):
-        parch = Image.open(parchment_path).convert('RGBA')
-        parch = parch.resize((OG_WIDTH, OG_HEIGHT), Image.Resampling.LANCZOS)
-        canvas = Image.blend(canvas, parch, 0.28)
-    
-    # Outer frame
-    frame_draw = ImageDraw.Draw(canvas)
-    draw_gold_frame(frame_draw, 16, 16, OG_WIDTH - 16, OG_HEIGHT - 16, radius=12)
-    
-    # Left & Right floral flourishes
-    floral_tl_path = 'invitation/public/assets/decorations/floral-top-left.png'
-    floral_br_path = 'invitation/public/assets/decorations/floral-bottom-right.png'
-    if os.path.exists(floral_tl_path):
-        ftl = Image.open(floral_tl_path).convert('RGBA')
-        # Corner flourish top-left
-        ftl1 = ftl.resize((210, 210), Image.Resampling.LANCZOS)
-        canvas.paste(ftl1, (10, 10), ftl1)
-        # Corner flourish top-right
-        ftr = ftl.transpose(Image.Transpose.FLIP_LEFT_RIGHT).resize((240, 240), Image.Resampling.LANCZOS)
-        canvas.paste(ftr, (OG_WIDTH - 230, 8), ftr)
-        
-    if os.path.exists(floral_br_path):
-        fbr = Image.open(floral_br_path).convert('RGBA').resize((230, 230), Image.Resampling.LANCZOS)
-        canvas.paste(fbr, (OG_WIDTH - 220, OG_HEIGHT - 220), fbr)
+    # 3. Navy & White Watercolor Florals in corners
+    ftl_path = 'invitation/public/assets/decorations/floral-top-left.png'
+    fbr_path = 'invitation/public/assets/decorations/floral-bottom-right.png'
+    if os.path.exists(ftl_path):
+        ftl = Image.open(ftl_path).convert('RGBA').resize((215, 215), Image.Resampling.LANCZOS)
+        canvas.paste(ftl, (12, 12), ftl)
+        # Top-right mirrored floral
+        ftr = ftl.transpose(Image.Transpose.FLIP_LEFT_RIGHT).resize((220, 220), Image.Resampling.LANCZOS)
+        canvas.paste(ftr, (W - 225, 12), ftr)
 
-    # 1. Left Couple Photo Panel
-    photo_w, photo_h = 475, 540
-    photo_x, photo_y = 44, 45
-    
-    couple_path = 'invitation/public/assets/hero-couple.jpg'
-    if not os.path.exists(couple_path):
-        couple_path = '00000042-DSC07832.jpg'
-    
-    couple_raw = Image.open(couple_path).convert('RGB')
-    cw, ch = couple_raw.size
-    
-    # Crop centered with ideal couple framing
-    target_aspect = photo_w / photo_h
-    crop_w = int(ch * target_aspect)
-    crop_h = ch
-    crop_x = int((cw - crop_w) * 0.5)
-    crop_y = 0
-    
-    cropped_couple = couple_raw.crop((crop_x, crop_y, crop_x + crop_w, crop_y + crop_h))
-    photo_resized = cropped_couple.resize((photo_w, photo_h), Image.Resampling.LANCZOS).convert('RGBA')
-    
-    # Soft rounded arch mask
+    if os.path.exists(fbr_path):
+        fbr = Image.open(fbr_path).convert('RGBA').resize((215, 215), Image.Resampling.LANCZOS)
+        canvas.paste(fbr, (W - 215, H - 215), fbr)
+
+    # 4. Couple Photo Framed Arch (Left Panel)
+    photo_w, photo_h = 470, 530
+    photo_x, photo_y = 52, 50
+
+    raw_photo = Image.open(photo_path).convert('RGB')
+    cropped = raw_photo.crop(crop_box)
+    resized_photo = cropped.resize((photo_w, photo_h), Image.Resampling.LANCZOS).convert('RGBA')
+
+    # Mask with rounded corners
     mask = Image.new('L', (photo_w, photo_h), 0)
     m_draw = ImageDraw.Draw(mask)
-    m_draw.rounded_rectangle([0, 0, photo_w, photo_h], radius=24, fill=255)
-    
-    # Add subtle soft shadow behind photo
-    shadow = Image.new('RGBA', (photo_w + 20, photo_h + 20), (0, 0, 0, 0))
+    m_draw.rounded_rectangle([0, 0, photo_w, photo_h], radius=22, fill=255)
+
+    # Soft ambient drop shadow
+    shadow = Image.new('RGBA', (photo_w + 24, photo_h + 24), (0, 0, 0, 0))
     s_draw = ImageDraw.Draw(shadow)
-    s_draw.rounded_rectangle([6, 6, photo_w + 14, photo_h + 14], radius=24, fill=(30, 20, 10, 45))
-    shadow = shadow.filter(ImageFilter.GaussianBlur(8))
-    canvas.paste(shadow, (photo_x - 10, photo_y - 8), shadow)
-    
-    # Paste Photo
-    canvas.paste(photo_resized, (photo_x, photo_y), mask)
-    
-    # Gold border on photo
-    draw = ImageDraw.Draw(canvas)
-    draw_gold_frame(draw, photo_x, photo_y, photo_x + photo_w, photo_y + photo_h, radius=24)
-    
-    # 2. Right Content Panel
-    content_x = 550
-    content_w = 610
-    
-    # Header ornament
-    orn_h_path = 'invitation/public/assets/decorations/ornament-header.png'
-    if os.path.exists(orn_h_path):
-        orn = Image.open(orn_h_path).convert('RGBA').resize((160, 48), Image.Resampling.LANCZOS)
-        canvas.paste(orn, (int(content_x + (content_w - 160) / 2), 48), orn)
-        
-    font_eyebrow = get_font(FONT_OPTIMA_BOLD, 13)
-    font_groom_bride = get_font(FONT_DIDOT_BOLD, 44)
-    font_connector = get_font(FONT_GEORGIA_ITALIC, 22)
-    font_date_main = get_font(FONT_DIDOT_BOLD, 25)
-    font_details = get_font(FONT_OPTIMA_BOLD, 15)
-    font_details_sub = get_font(FONT_GEORGIA, 14)
-    font_url = get_font(FONT_GEORGIA_BOLD, 13)
-    
+    s_draw.rounded_rectangle([8, 8, photo_w + 16, photo_h + 16], radius=22, fill=(20, 30, 45, 55))
+    shadow = shadow.filter(ImageFilter.GaussianBlur(10))
+    canvas.paste(shadow, (photo_x - 12, photo_y - 10), shadow)
+
+    # Paste Couple Photo
+    canvas.paste(resized_photo, (photo_x, photo_y), mask)
+
+    # Double Gold Arch Border around photo
+    draw.rounded_rectangle([photo_x, photo_y, photo_x + photo_w, photo_y + photo_h], radius=22, outline=GOLD_ACCENT, width=2)
+    draw.rounded_rectangle([photo_x + 4, photo_y + 4, photo_x + photo_w - 4, photo_y + photo_h - 4], radius=18, outline=GOLD_LINE, width=1)
+
+    # 5. Right Content Area
+    cx = 555
+    cw = 595
+
+    # Crest / Monogram at top
+    crest_path = 'invitation/public/assets/florals/crest-monogram.png'
+    if os.path.exists(crest_path):
+        crest = Image.open(crest_path).convert('RGBA').resize((66, 66), Image.Resampling.LANCZOS)
+        canvas.paste(crest, (int(cx + (cw - 66) / 2), 44), crest)
+
+    def text_center(y, text, font, fill):
+        bbox = draw.textbbox((0, 0), text, font=font)
+        tw = bbox[2] - bbox[0]
+        x = int(cx + (cw - tw) / 2)
+        draw.text((x, y), text, font=font, fill=fill)
+        return y + (bbox[3] - bbox[1])
+
     # Eyebrow
-    draw_tracked_text(draw, 102, "WEDDING  INVITATION", font_eyebrow, COLOR_GOLD, letter_spacing=5, width=content_w, x_offset=content_x)
-    
-    # Groom Name
-    draw_tracked_text(draw, 136, "AJAY  BABU", font_groom_bride, COLOR_NAVY_DEEP, letter_spacing=3, width=content_w, x_offset=content_x)
-    
-    # Connector
-    draw_text_centered(draw, 196, "unites in heart and soul with", font_connector, COLOR_GOLD_LIGHT, width=content_w, x_offset=content_x)
-    
-    # Bride Name
-    draw_tracked_text(draw, 230, "HENNA  PRATHAP", font_groom_bride, COLOR_NAVY_DEEP, letter_spacing=3, width=content_w, x_offset=content_x)
-    
-    # Divider
-    orn_div_path = 'invitation/public/assets/decorations/ornament-divider.png'
-    if os.path.exists(orn_div_path):
-        div = Image.open(orn_div_path).convert('RGBA').resize((210, 22), Image.Resampling.LANCZOS)
-        canvas.paste(div, (int(content_x + (content_w - 210) / 2), 296), div)
-        
-    # Date & Venue Card
+    text_center(116, "W E D D I N G   I N V I T A T I O N", font_cinzel_xs, GOLD_ACCENT)
+
+    # Couple Names
+    text_center(144, "AJAY BABU", font_cinzel_lg, NAVY_DEEP)
+    text_center(196, "and", font_script, GOLD_ACCENT)
+    text_center(232, "HENNA PRATHAP", font_cinzel_lg, NAVY_DEEP)
+
+    # Gold ornamental divider
+    orn_div = 'invitation/public/assets/decorations/ornament-divider.png'
+    if os.path.exists(orn_div):
+        od = Image.open(orn_div).convert('RGBA').resize((180, 18), Image.Resampling.LANCZOS)
+        canvas.paste(od, (int(cx + (cw - 180) / 2), 296), od)
+
+    # Date & Occasion Card
     card_w = 460
-    card_h = 120
-    card_x = int(content_x + (content_w - card_w) / 2)
-    card_y = 332
-    
-    # Card soft shadow
+    card_h = 135
+    card_x = int(cx + (cw - card_w) / 2)
+    card_y = 330
+
     card_shadow = Image.new('RGBA', (card_w + 16, card_h + 16), (0, 0, 0, 0))
     cs_draw = ImageDraw.Draw(card_shadow)
-    cs_draw.rounded_rectangle([4, 4, card_w + 12, card_h + 12], radius=14, fill=(40, 25, 15, 30))
+    cs_draw.rounded_rectangle([4, 4, card_w + 12, card_h + 12], radius=14, fill=(15, 30, 50, 25))
     card_shadow = card_shadow.filter(ImageFilter.GaussianBlur(6))
     canvas.paste(card_shadow, (card_x - 8, card_y - 6), card_shadow)
-    
-    # Card surface
-    draw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=14, fill=COLOR_CREAM_CARD)
-    draw_gold_frame(draw, card_x, card_y, card_x + card_w, card_y + card_h, radius=14)
-    
-    # Date text inside card
-    draw_tracked_text(draw, card_y + 16, "SUNDAY  •  04  OCTOBER  2026", font_date_main, COLOR_NAVY, letter_spacing=2, width=card_w, x_offset=card_x)
-    draw_tracked_text(draw, card_y + 54, "6:30 PM  ONWARDS  •  RECEPTION", font_details, COLOR_GOLD, letter_spacing=3, width=card_w, x_offset=card_x)
-    draw_text_centered(draw, card_y + 82, "Adlux International Convention Center, Angamaly", font_details_sub, COLOR_TEXT_MUTED, width=card_w, x_offset=card_x)
-    
-    # Production Link Badge
-    url_pill_w = 320
-    url_pill_h = 32
-    url_pill_x = int(content_x + (content_w - url_pill_w) / 2)
-    url_pill_y = 485
-    
-    draw.rounded_rectangle([url_pill_x, url_pill_y, url_pill_x + url_pill_w, url_pill_y + url_pill_h], radius=16, fill=(26, 54, 93, 240))
-    draw_tracked_text(draw, url_pill_y + 8, "ajay-henna.vercel.app", font_url, (253, 248, 241), letter_spacing=2, width=url_pill_w, x_offset=url_pill_x)
-    
-    return canvas.convert('RGB')
+
+    draw.rounded_rectangle([card_x, card_y, card_x + card_w, card_y + card_h], radius=14, fill=(255, 253, 250, 245), outline=GOLD_ACCENT, width=1)
+    draw.rounded_rectangle([card_x + 3, card_y + 3, card_x + card_w - 3, card_y + card_h - 3], radius=11, outline=GOLD_LINE, width=1)
+
+    def card_center(y, text, font, fill):
+        bbox = draw.textbbox((0, 0), text, font=font)
+        tw = bbox[2] - bbox[0]
+        x = int(card_x + (card_w - tw) / 2)
+        draw.text((x, y), text, font=font, fill=fill)
+
+    card_center(card_y + 14, "SUNDAY  •  04 OCTOBER 2026", font_cinzel_md, NAVY_INK)
+    card_center(card_y + 50, "SACRAMENT OF MATRIMONY  &  RECEPTION", font_cinzel_xs, GOLD_ACCENT)
+    card_center(card_y + 74, "Little Flower Church, Kurumassery • 3:00 PM", font_playfair, TEXT_MUTED)
+    card_center(card_y + 98, "Adlux Convention Centre, Angamaly • 6:30 PM", font_playfair, TEXT_MUTED)
+
+    # Production Link Pill
+    pill_w = 340
+    pill_h = 36
+    pill_x = int(cx + (cw - pill_w) / 2)
+    pill_y = 488
+
+    draw.rounded_rectangle([pill_x, pill_y, pill_x + pill_w, pill_y + pill_h], radius=18, fill=NAVY_DEEP)
+    draw.rounded_rectangle([pill_x, pill_y, pill_x + pill_w, pill_y + pill_h], radius=18, outline=GOLD_LINE, width=1)
+
+    url_str = "ajay-weds-henna.vercel.app"
+    bbox = draw.textbbox((0, 0), url_str, font=font_url)
+    tw = bbox[2] - bbox[0]
+    draw.text((int(pill_x + (pill_w - tw) / 2), pill_y + 8), url_str, font=font_url, fill=(255, 255, 255))
+
+    final_rgb = canvas.convert('RGB')
+    final_rgb.save(output_path, quality=96)
+    print(f"Generated {output_path}")
+    return final_rgb
 
 if __name__ == '__main__':
-    img = generate_primary_og_image()
-    img.save('invitation/public/og-image.jpg', quality=95)
+    # Primary: Joyful walking couple (gallery-5)
+    im5 = Image.open('invitation/public/assets/gallery-5.jpg')
+    w5, h5 = im5.size
+    crop_walk = (int(w5 * 0.05), int(h5 * 0.22), int(w5 * 0.88), int(h5 * 0.88))
+    
+    img = build_og_image('invitation/public/assets/gallery-5.jpg', crop_walk, 'invitation/public/og-image.jpg')
     img.save('invitation/public/og-image.png')
-    img.save('invitation/public/assets/og-image.jpg', quality=95)
-    print('Generated primary high-fidelity couple OG image successfully!')
+    img.save('invitation/public/assets/og-image.jpg', quality=96)
+    
+    # Secondary variations for choice:
+    im2 = Image.open('invitation/public/assets/gallery-2.jpg')
+    w2, h2 = im2.size
+    crop_candid = (int(w2 * 0.02), int(h2 * 0.12), int(w2 * 0.95), int(h2 * 0.85))
+    build_og_image('invitation/public/assets/gallery-2.jpg', crop_candid, 'invitation/public/og-image-candid.jpg')
+
+    print("All couple-focused OG images generated successfully!")
