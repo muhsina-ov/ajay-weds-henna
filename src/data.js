@@ -35,10 +35,24 @@ export const OCCASIONS = [
 ]
 
 export const STORY = {
-  title: 'A connection built on understanding',
+  title: 'Two Journeys · One Story',
+  bride: {
+    name: 'Henna',
+    role: 'The Bride',
+    bio: 'Henna is a vibrant medical student with an adventurous heart and a creative soul. A talented singer and dancer, she finds joy in movies, fashion, and expressing her individuality with effortless charm. Kind, beautiful, and full of life, she brings warmth and spontaneity to every moment she touches.',
+  },
+  interlude: 'And then, life had a beautiful surprise waiting for her…',
+  groom: {
+    name: 'Ajay',
+    role: 'The Groom',
+    bio: 'Ajay is a handsome and charismatic entrepreneur, leading the way at SG Group with ambition, talent, and determination. A gentleman at heart, he is passionate about swimming, adventure, movies, and making the most of every experience life has to offer. Confident yet kind, driven yet easy-going, Ajay has a charm that is impossible to miss. He is Henna’s biggest fan.',
+  },
+  conclusion: 'Two different journeys. Two beautiful souls. And somehow, they found their way to each other—turning two separate stories into one they never want to end.',
   paragraphs: [
-    "Ajay and Henna's journey began with a simple meeting. What started as an introduction grew into a connection shaped by comfort, honesty, and the ease of truly talking to one another.",
-    'In time, those conversations became the foundation of a meaningful partnership. On 04 October 2026, they begin their next chapter together, surrounded by the people they love.',
+    'Henna is a vibrant medical student with an adventurous heart and a creative soul. A talented singer and dancer, she finds joy in movies, fashion, and expressing her individuality with effortless charm. Kind, beautiful, and full of life, she brings warmth and spontaneity to every moment she touches.',
+    'And then, life had a beautiful surprise waiting for her…',
+    'Ajay is a handsome and charismatic entrepreneur, leading the way at SG Group with ambition, talent, and determination. A gentleman at heart, he is passionate about swimming, adventure, movies, and making the most of every experience life has to offer. Confident yet kind, driven yet easy-going, Ajay has a charm that is impossible to miss. He is Henna’s biggest fan.',
+    'Two different journeys. Two beautiful souls. And somehow, they found their way to each other—turning two separate stories into one they never want to end.',
   ],
 }
 

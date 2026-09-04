@@ -18,10 +18,35 @@ export default function Story() {
       <motion.figure className="story-photo" initial={reduceMotion ? false : { opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.8 }}>
         <motion.img style={reduceMotion ? undefined : { y: imageY, scale: imageScale }} src="/assets/couple-picnic.jpg" alt="Ajay and Henna sharing a quiet moment together" loading="lazy" />
       </motion.figure>
-      <motion.div className="story-copy" initial={reduceMotion ? false : { opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.75, delay: 0.1 }}>
+      <motion.div className="story-copy" initial={reduceMotion ? false : { opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.75, delay: 0.1 }}>
         <span className="story-monogram"><img src="/assets/florals/open-wreath.png" alt="" />A <i /> H</span>
         <h2 id="story-heading">{STORY.title}</h2>
-        {STORY.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+
+        <div className="story-profile story-profile-henna">
+          <div className="story-profile-header">
+            <span className="story-profile-role">{STORY.bride.role}</span>
+            <h3 className="story-profile-name">{STORY.bride.name}</h3>
+          </div>
+          <p className="story-profile-bio">{STORY.bride.bio}</p>
+        </div>
+
+        <div className="story-interlude">
+          <span className="story-interlude-flourish">✦</span>
+          <p className="story-interlude-text">“{STORY.interlude}”</p>
+          <span className="story-interlude-flourish">✦</span>
+        </div>
+
+        <div className="story-profile story-profile-ajay">
+          <div className="story-profile-header">
+            <span className="story-profile-role">{STORY.groom.role}</span>
+            <h3 className="story-profile-name">{STORY.groom.name}</h3>
+          </div>
+          <p className="story-profile-bio">{STORY.groom.bio}</p>
+        </div>
+
+        <div className="story-conclusion">
+          <p>{STORY.conclusion}</p>
+        </div>
       </motion.div>
     </section>
   )
