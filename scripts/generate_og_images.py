@@ -139,17 +139,16 @@ def build_og_image(photo_path, crop_box, output_path):
     card_center(card_y + 98, "Adlux Convention Centre, Angamaly • 6:30 PM", font_playfair, TEXT_MUTED)
 
     # Production Link Pill
-    pill_w = 340
+    url_str = "ajay-and-henna.invitingyou.top"
+    bbox = draw.textbbox((0, 0), url_str, font=font_url)
+    tw = bbox[2] - bbox[0]
+    pill_w = max(350, tw + 48)
     pill_h = 36
     pill_x = int(cx + (cw - pill_w) / 2)
     pill_y = 488
 
     draw.rounded_rectangle([pill_x, pill_y, pill_x + pill_w, pill_y + pill_h], radius=18, fill=NAVY_DEEP)
     draw.rounded_rectangle([pill_x, pill_y, pill_x + pill_w, pill_y + pill_h], radius=18, outline=GOLD_LINE, width=1)
-
-    url_str = "ajay-weds-henna.vercel.app"
-    bbox = draw.textbbox((0, 0), url_str, font=font_url)
-    tw = bbox[2] - bbox[0]
     draw.text((int(pill_x + (pill_w - tw) / 2), pill_y + 8), url_str, font=font_url, fill=(255, 255, 255))
 
     final_rgb = canvas.convert('RGB')
