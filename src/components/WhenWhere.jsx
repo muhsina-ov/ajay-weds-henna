@@ -53,7 +53,21 @@ export default function WhenWhere() {
                 <strong>{occasion.note}</strong>
                 {occasion.subtitle && <em>{occasion.subtitle}</em>}
               </motion.div>
-              <motion.a variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} href={occasion.mapsUrl} target="_blank" rel="noreferrer">View location</motion.a>
+              <motion.a
+                variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
+                href={occasion.mapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="directions-button"
+                whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M12 2a8 8 0 00-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 00-8-8z" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Get Direction</span>
+              </motion.a>
             </motion.div>
           </motion.article>
         ))}

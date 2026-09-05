@@ -14,10 +14,13 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="hero" aria-labelledby="wedding-title">
-      <AnimatedAsset className="hero-floral hero-floral-one" src="/assets/florals/grand-corner.webp" from="left" delay={0.05} drift={8} rotate={0.8} duration={8} />
-      <AnimatedAsset className="hero-floral hero-floral-two" src="/assets/florals/grand-corner.webp" from="right" delay={0.18} drift={10} rotate={1} duration={9} />
-      <AnimatedAsset className="hero-spray hero-spray-one" src="/assets/florals/side-spray.webp" from="top" delay={0.28} drift={12} rotate={1.5} duration={7.5} />
-      <AnimatedAsset className="hero-spray hero-spray-two" src="/assets/florals/side-spray.webp" from="bottom" delay={0.36} drift={10} rotate={1.2} duration={8.5} />
+      {/* Lush Royal Florals Framing the Card */}
+      <AnimatedAsset className="hero-floral hero-floral-tl" src="/assets/florals/grand-corner.webp" from="left" delay={0.05} drift={8} rotate={0.8} duration={8} />
+      <AnimatedAsset className="hero-floral hero-floral-tr" src="/assets/florals/grand-corner.webp" from="right" delay={0.12} drift={10} rotate={-0.8} duration={8.5} />
+      <AnimatedAsset className="hero-spray hero-spray-ml" src="/assets/florals/side-spray.webp" from="left" delay={0.2} drift={12} rotate={1.2} duration={7.5} />
+      <AnimatedAsset className="hero-spray hero-spray-mr" src="/assets/florals/side-spray.webp" from="right" delay={0.25} drift={10} rotate={-1.2} duration={8} />
+      <AnimatedAsset className="hero-floral hero-floral-bl" src="/assets/florals/grand-corner.webp" from="left" delay={0.3} drift={9} rotate={-1} duration={9} />
+      <AnimatedAsset className="hero-floral hero-floral-br" src="/assets/florals/grand-corner.webp" from="right" delay={0.35} drift={11} rotate={1} duration={9.5} />
       <AnimatedAsset className="hero-silk" src="/assets/florals/silk-ribbon.webp" from="bottom" delay={0.42} drift={14} rotate={0.7} duration={10} />
 
       <motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
@@ -41,7 +44,32 @@ export default function Hero() {
           </span>
           <span>{COUPLE.bride}</span>
         </motion.h1>
-        <motion.p {...reveal} transition={{ duration: 0.8, delay: 0.25 }} className="hero-invitation">Together with our families,<br />we invite you to celebrate with us</motion.p>
+
+        {/* 2 Royal Intertwined Wedding Rings */}
+        <motion.div
+          {...reveal}
+          transition={{ duration: 0.85, delay: 0.22 }}
+          className="hero-rings-wrap"
+        >
+          <div className="rings-glow-effect" aria-hidden="true" />
+          <motion.img
+            src="/assets/decorations/wedding-rings.webp"
+            alt="Two Intertwined Gold Wedding Rings"
+            className="hero-rings-img"
+            animate={reduceMotion ? undefined : {
+              y: [0, -4, 0],
+              rotate: [0, 1, 0, -1, 0],
+              filter: [
+                'drop-shadow(0 6px 14px rgba(212, 175, 55, 0.32)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
+                'drop-shadow(0 8px 20px rgba(212, 175, 55, 0.5)) drop-shadow(0 3px 8px rgba(11, 59, 114, 0.18))',
+                'drop-shadow(0 6px 14px rgba(212, 175, 55, 0.32)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
+              ]
+            }}
+            transition={reduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+
+        <motion.p {...reveal} transition={{ duration: 0.8, delay: 0.28 }} className="hero-invitation">Together with our families,<br />we invite you to celebrate with us</motion.p>
         <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.34 }} className="hero-date">
           <strong>04</strong><span>October</span><strong>2026</strong>
         </motion.div>

@@ -153,7 +153,7 @@ export default function EnvelopeReveal({ onOpen }) {
                 initial={false}
                 animate={
                   isCardOut
-                    ? { y: '-62%', scale: 1.025, rotateZ: -0.15 }
+                    ? { y: '-72%', scale: 1.02, rotateZ: -0.1 }
                     : { y: '0%', scale: 1, rotateZ: 0 }
                 }
                 transition={{
@@ -185,6 +185,15 @@ export default function EnvelopeReveal({ onOpen }) {
                   <span>Henna Prathap</span>
                 </h2>
 
+                {/* 2 Wedding Rings */}
+                <div className="card-rings-wrap">
+                  <img
+                    src="/assets/decorations/wedding-rings.webp"
+                    alt="Two Wedding Rings"
+                    className="card-rings-img"
+                  />
+                </div>
+
                 {/* Invitation Text */}
                 <p className="card-invitation-text">
                   Together with our families,<br />we invite you to celebrate with us
@@ -195,14 +204,6 @@ export default function EnvelopeReveal({ onOpen }) {
                   <strong>04</strong>
                   <span>October</span>
                   <strong>2026</strong>
-                </div>
-
-                {/* Scroll Hint */}
-                <div className="card-scroll-hint" aria-hidden="true">
-                  <span>Scroll to explore</span>
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6">
-                    <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
                 </div>
               </motion.div>
 
