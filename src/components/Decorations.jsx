@@ -9,6 +9,42 @@ export const ASSETS = {
   heartGold: `${BASE}/heart-gold.webp`,
   cornerFlourish: `${BASE}/corner-flourish.webp`,
   parchmentTexture: `${BASE}/parchment-texture.webp`,
+  churchSilhouette: `${BASE}/church-silhouette.webp`,
+  churchSilhouettePng: `${BASE}/church-silhouette.png`,
+  conventionCentreSilhouette: `${BASE}/convention-centre-silhouette.webp`,
+  conventionCentreSilhouettePng: `${BASE}/convention-centre-silhouette.png`,
+}
+
+export function ChurchSilhouette({ className = '' }) {
+  return (
+    <div className={`occasion-church-silhouette ${className}`} aria-hidden="true">
+      <picture>
+        <source srcSet={ASSETS.churchSilhouette} type="image/webp" />
+        <img
+          src={ASSETS.churchSilhouettePng}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  )
+}
+
+export function ConventionCentreSilhouette({ className = '' }) {
+  return (
+    <div className={`occasion-convention-silhouette ${className}`} aria-hidden="true">
+      <picture>
+        <source srcSet={ASSETS.conventionCentreSilhouette} type="image/webp" />
+        <img
+          src={ASSETS.conventionCentreSilhouettePng}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  )
 }
 
 export function FloralTopLeft({ className = '' }) {

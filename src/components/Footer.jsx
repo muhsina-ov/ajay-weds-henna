@@ -2,14 +2,21 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { COUPLE, FAMILY } from '../data'
 import AnimatedAsset from './AnimatedAsset'
 
-const GALLERY = ['/assets/gallery-1.webp', '/assets/gallery-2.webp', '/assets/gallery-3.webp', '/assets/gallery-4.webp', '/assets/gallery-5.webp']
+const GALLERY = [
+  '/assets/gallery-1.webp',
+  '/assets/gallery-2.webp',
+  '/assets/gallery-3.webp',
+  '/assets/gallery-4.webp',
+  '/assets/gallery-5.webp',
+  '/assets/gallery-6.webp',
+]
 
 export default function Footer() {
   const reduceMotion = useReducedMotion()
 
   return (
     <>
-      <section className="gallery" aria-label="Ajay and Henna photo gallery">
+      <section id="gallery" className="gallery" aria-label="Ajay and Henna photo gallery">
         {GALLERY.map((src, index) => (
           <motion.figure key={src} className={`gallery-item gallery-item-${index + 1}`} initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6, delay: index * 0.06 }}>
             <motion.img src={src} alt={`Ajay and Henna, moment ${index + 1}`} loading="lazy" whileHover={reduceMotion ? undefined : { scale: 1.055 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }} />

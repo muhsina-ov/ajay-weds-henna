@@ -76,50 +76,55 @@ export default function EnvelopeReveal({ onOpen }) {
   })
   const [flapZIndexBack, setFlapZIndexBack] = useState(false)
   const timers = useRef([])
+  const hasFinished = useRef(false)
   const reduceMotion = useReducedMotion()
 
   useEffect(() => () => timers.current.forEach(window.clearTimeout), [])
 
+  const finishReveal = () => {
+    if (hasFinished.current) return
+    hasFinished.current = true
+    timers.current.forEach(window.clearTimeout)
+    setPhase('done')
+    onOpen()
+  }
+
   const openInvitation = () => {
+    // If already in motion, clicking again immediately reveals hero
+    if (phase === 'opening' || phase === 'unfolded') {
+      finishReveal()
+      return
+    }
     if (phase !== 'sealed') return
     playUnfoldSound()
 
     if (reduceMotion) {
-      setPhase('done')
-      onOpen()
+      finishReveal()
       return
     }
 
     setPhase('opening')
 
-    // Phase 1: Flap is flipping open - once it passes 90 deg, drop z-index behind card
-    timers.current.push(window.setTimeout(() => setFlapZIndexBack(true), 240))
+    // Phase 1: Flap flips open - once past 90 deg, drop z-index behind card
+    timers.current.push(window.setTimeout(() => setFlapZIndexBack(true), 200))
 
-    // Phase 2: Flap fully opened, card starts ascending
-    timers.current.push(window.setTimeout(() => setPhase('unfolded'), 520))
+    // Phase 2: Flap opened, card begins rising out of envelope pocket
+    timers.current.push(window.setTimeout(() => setPhase('unfolded'), 340))
 
-    // Phase 3: Card reaches full rise
-    timers.current.push(window.setTimeout(() => setPhase('revealed'), 950))
-
-    // Phase 4: Seamless gate dissolve into full invitation site
-    timers.current.push(
-      window.setTimeout(() => {
-        setPhase('done')
-        onOpen()
-      }, 2500)
-    )
+    // Phase 3: Immediate transition to hero once rising finishes (340ms + 680ms = ~1020ms)
+    timers.current.push(window.setTimeout(() => finishReveal(), 1050))
   }
 
   const isFlapOpen = phase !== 'sealed'
-  const isCardOut = phase === 'unfolded' || phase === 'revealed'
+  const isCardOut = phase === 'unfolded'
 
   return (
     <AnimatePresence>
       {phase !== 'done' && (
         <motion.div
           className="invitation-gate"
-          exit={{ opacity: 0, scale: 1.03, filter: 'blur(8px)' }}
-          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          exit={{ opacity: 0, scale: 1.04 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <img className="gate-floral gate-floral-left" src="/assets/florals/grand-corner.webp" alt="" />
           <img className="gate-floral gate-floral-right" src="/assets/florals/grand-corner.webp" alt="" />
@@ -139,7 +144,7 @@ export default function EnvelopeReveal({ onOpen }) {
                 scale: 1,
               }}
               whileHover={phase === 'sealed' && !reduceMotion ? { scale: 1.018, y: -4 } : undefined}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Back Shell + Floral Liner */}
               <div className="envelope-back-wall">
@@ -147,21 +152,23 @@ export default function EnvelopeReveal({ onOpen }) {
                 <div className="envelope-pocket-shadow" />
               </div>
 
-              {/* The Letter Card Inside (glides out with 120fps spring physics) */}
+              {/* The Letter Card Inside (rises gracefully and prompts hero section on completion) */}
               <motion.div
                 className="envelope-card"
                 initial={false}
                 animate={
                   isCardOut
-                    ? { y: '-72%', scale: 1.02, rotateZ: -0.1 }
+                    ? { y: '-78%', scale: 1.025, rotateZ: -0.05 }
                     : { y: '0%', scale: 1, rotateZ: 0 }
                 }
                 transition={{
-                  type: 'spring',
-                  stiffness: 82,
-                  damping: 15,
-                  mass: 0.85,
-                  delay: isCardOut ? 0.06 : 0,
+                  duration: 0.68,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                onAnimationComplete={() => {
+                  if (isCardOut) {
+                    finishReveal()
+                  }
                 }}
               >
                 <div className="card-border-frame" />
@@ -285,7 +292,7 @@ export default function EnvelopeReveal({ onOpen }) {
                     rotateX: isFlapOpen ? -176 : 0,
                   }}
                   transition={{
-                    duration: 0.82,
+                    duration: 0.55,
                     ease: [0.25, 1, 0.35, 1],
                   }}
                 >
@@ -365,12 +372,16 @@ export default function EnvelopeReveal({ onOpen }) {
 
           <motion.div
             className="gate-instruction-box"
+            role="button"
+            tabIndex={0}
+            onClick={openInvitation}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && openInvitation()}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: phase === 'sealed' ? 1 : 0, y: phase === 'sealed' ? 0 : 10 }}
             transition={{ duration: 0.4 }}
           >
             <span className="gate-sparkle">✦</span>
-            <p className="gate-instruction">Tap the wax seal to open</p>
+            <p className="gate-instruction">Tap envelope to open</p>
             <span className="gate-sparkle">✦</span>
           </motion.div>
         </motion.div>

@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { COUPLE } from '../data'
 import AnimatedAsset from './AnimatedAsset'
+import HeroDateBadge from './HeroDateBadge'
 
 export default function Hero() {
   const reduceMotion = useReducedMotion()
@@ -25,7 +26,18 @@ export default function Hero() {
 
       <motion.div className="hero-copy" style={reduceMotion ? undefined : { y: copyY }}>
         <div className="hero-frame" aria-hidden="true" />
-        <motion.div {...reveal} transition={{ duration: 0.8 }} className="crest-wrap">
+        {/* Sacred Scripture Quote */}
+        <motion.div {...reveal} transition={{ duration: 0.8 }} className="hero-top-quote">
+          <p className="hero-top-quote-text">“I have found the one whom my soul loves.”</p>
+          <p className="hero-top-quote-source">Song of Solomon 3:4</p>
+          <div className="hero-top-quote-divider" aria-hidden="true">
+            <span className="quote-line" />
+            <span className="quote-flourish">❦</span>
+            <span className="quote-line quote-line-right" />
+          </div>
+        </motion.div>
+
+        <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.06 }} className="crest-wrap">
           <motion.img
             src="/assets/florals/crest-monogram.webp"
             alt="Ajay and Henna Monogram"
@@ -70,8 +82,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.p {...reveal} transition={{ duration: 0.8, delay: 0.28 }} className="hero-invitation">Together with our families,<br />we invite you to celebrate with us</motion.p>
-        <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.34 }} className="hero-date">
-          <strong>04</strong><span>October</span><strong>2026</strong>
+        <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.34 }} className="hero-badges-wrapper">
+          <HeroDateBadge />
         </motion.div>
         <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.42 }} className="hero-scroll-hint" aria-hidden="true">
           <span>Scroll to explore</span>

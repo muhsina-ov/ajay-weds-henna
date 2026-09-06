@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { CEREMONY_DATE, OCCASIONS, generateICS } from '../data'
 import AnimatedAsset from './AnimatedAsset'
+import { ChurchSilhouette, ConventionCentreSilhouette } from './Decorations'
 
 function getTimeLeft() {
   const difference = Math.max(0, CEREMONY_DATE.getTime() - Date.now())
@@ -35,13 +36,15 @@ export default function WhenWhere() {
       <div className="occasion-grid">
         {OCCASIONS.map((occasion, index) => (
           <motion.article
-            className="occasion"
+            className={`occasion occasion-${occasion.id}`}
             key={occasion.id}
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.65, delay: index * 0.12 }}
           >
+            {occasion.id === 'matrimony' && <ChurchSilhouette />}
+            {occasion.id === 'reception' && <ConventionCentreSilhouette />}
             <motion.div variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.085 } } }} initial={reduceMotion ? 'visible' : 'hidden'} whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
               <motion.span variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }} className="occasion-index">0{index + 1}</motion.span>
               <motion.h3 variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}>{occasion.label}</motion.h3>
