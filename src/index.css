@@ -501,6 +501,7 @@ img { display: block; max-width: 100%; }
   left: -3.5rem;
   width: min(28rem, 36vw);
   opacity: 0.95;
+  transform: rotate(90deg);
 }
 
 .hero-floral-tr {
@@ -508,7 +509,7 @@ img { display: block; max-width: 100%; }
   right: -3.5rem;
   width: min(28rem, 36vw);
   opacity: 0.95;
-  transform: scaleX(-1);
+  transform: scaleX(-1) rotate(90deg);
 }
 
 .hero-spray {
@@ -1095,8 +1096,8 @@ img { display: block; max-width: 100%; }
   .hero-portrait::after { background: linear-gradient(180deg, rgba(238, 245, 250, 0.95) 0%, transparent 20%), linear-gradient(0deg, rgba(9, 45, 83, 0.35) 0%, transparent 40%); }
   .hero h1 { gap: 0.15rem; font-size: clamp(1.5rem, 5.8vw, 2.8rem); letter-spacing: 0.04em; }
   .hero h1 em { font-size: 2.2rem; }
-  .hero-floral-tl { top: -2rem; left: -2.5rem; width: min(22rem, 55vw); opacity: 0.92; }
-  .hero-floral-tr { top: -2rem; right: -2.5rem; width: min(22rem, 55vw); opacity: 0.92; transform: scaleX(-1); }
+  .hero-floral-tl { top: -2rem; left: -2.5rem; width: min(22rem, 55vw); opacity: 0.92; transform: rotate(90deg); }
+  .hero-floral-tr { top: -2rem; right: -2.5rem; width: min(22rem, 55vw); opacity: 0.92; transform: scaleX(-1) rotate(90deg); }
   .hero-spray-ml { top: 32%; left: -2rem; width: min(11rem, 28vw); opacity: 0.8; }
   .hero-spray-mr { top: 32%; right: -2rem; width: min(11rem, 28vw); opacity: 0.8; transform: scaleX(-1); }
   .hero-floral-bl { bottom: -2rem; left: -2.5rem; width: min(20rem, 52vw); opacity: 0.9; transform: scaleY(-1); }
@@ -1171,13 +1172,14 @@ img { display: block; max-width: 100%; }
     left: -1.6rem;
     width: min(11rem, 38vw);
     opacity: 0.92;
+    transform: rotate(90deg);
   }
   .hero-floral-tr {
     top: -2rem;
     right: -1.6rem;
     width: min(11rem, 38vw);
     opacity: 0.92;
-    transform: scaleX(-1);
+    transform: scaleX(-1) rotate(90deg);
   }
   .hero-spray-ml {
     top: 36%;
