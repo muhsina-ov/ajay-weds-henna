@@ -54,7 +54,7 @@ export default function Footer() {
             <span>A</span><i /><span>H</span>
           </div>
           <p>With Love &amp; Joy</p>
-          <h2>{COUPLE.groomShort} <em>and</em> {COUPLE.brideShort}</h2>
+          <h2>{COUPLE.groomShort} <em>&amp;</em> {COUPLE.brideShort}</h2>
           <strong>04 October 2026</strong>
           <span>{FAMILY.text}</span>
           <div className="family-names">

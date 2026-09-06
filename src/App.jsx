@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import WhenWhere from './components/WhenWhere'
 import Story from './components/Story'
 import Footer from './components/Footer'
+import MusicPlayer from './components/MusicPlayer'
 
 export default function App() {
   const [opened, setOpened] = useState(() => {
@@ -25,6 +26,7 @@ export default function App() {
 
   return (
     <div className={`site-shell ${opened ? 'is-opened' : 'is-locked'}`}>
+      <MusicPlayer />
       <EnvelopeReveal onOpen={() => setOpened(true)} />
       <AnimatePresence>
         {opened && (
