@@ -262,12 +262,24 @@ img { display: block; max-width: 100%; }
 }
 
 .envelope-card .card-invitation-text {
-  max-width: 19rem;
-  font: 500 clamp(0.5rem, 1vw, 0.58rem) / 1.65 var(--display);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  width: 100%;
+  max-width: 25rem;
   margin-top: 0.25rem;
+  text-align: center;
+}
+
+.card-invitation-line {
+  display: block;
+  font: 500 clamp(0.38rem, 0.85vw, 0.52rem) / 1.5 var(--display);
+  letter-spacing: clamp(0.06em, 0.2vw, 0.12em);
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.85;
+  white-space: nowrap;
 }
 
 .envelope-card .card-date-plaque {
@@ -591,9 +603,28 @@ img { display: block; max-width: 100%; }
 .hero h1 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; font: 500 clamp(2rem, 3.8vw, 4.2rem) / 1.05 var(--display); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); width: 100%; }
 .hero-names-divider { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; margin-block: 0.15rem; }
 .hero-names-divider .sprig { display: inline-block; width: 2.5rem; height: 1px; background: linear-gradient(90deg, transparent, var(--line-strong)); }
-.hero-names-divider .sprig-right { background: linear-gradient(90deg, var(--line-strong), transparent); }
-.hero h1 em { font: 400 clamp(1.8rem, 2.6vw, 3rem) / 1 var(--script); letter-spacing: 0; text-transform: none; color: var(--blue-soft); }
-.hero-invitation { max-width: 28rem; margin-top: 1.5rem; font: 500 0.72rem / 1.85 var(--display); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+.hero-invitation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 52rem;
+  margin-top: 1.4rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero-invitation-line {
+  display: block;
+  font: 500 clamp(0.48rem, 2.15vw, 0.72rem) / 1.55 var(--display);
+  letter-spacing: clamp(0.06em, 0.4vw, 0.14em);
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.88;
+  white-space: nowrap;
+}
 .hero-badges-wrapper { width: 100%; max-width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 1.85rem; box-sizing: border-box; }
 .hero-royal-badges { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.65rem; width: 100%; max-width: 31.5rem; margin-inline: auto; box-sizing: border-box; }
 .hero-royal-badge { display: flex; justify-content: center; align-items: center; width: 100%; text-decoration: none; cursor: default; box-sizing: border-box; }
@@ -682,42 +713,96 @@ img { display: block; max-width: 100%; }
 .occasion-note strong { color: var(--ink); font-weight: 600; }
 .occasion-note em { color: var(--blue); font-weight: 400; }
 .directions-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 0.7rem;
   margin-top: 2rem;
-  padding: 0.72rem 1.6rem;
-  border: 1px solid var(--blue);
+  padding: 0.65rem 1.15rem 0.65rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--blue);
+  background: linear-gradient(135deg, #0b3b72 0%, #062447 100%);
+  border: 1px solid rgba(212, 175, 55, 0.65);
+  color: #ffffff;
   font: 600 0.68rem var(--display);
   letter-spacing: 0.16em;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(11, 59, 114, 0.08);
+  box-shadow: 0 5px 20px rgba(11, 59, 114, 0.24), 0 2px 6px rgba(212, 175, 55, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.22);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.directions-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transition: left 0.65s ease;
+}
+
+.directions-button:hover::before {
+  left: 100%;
 }
 
 .directions-button:hover {
-  background: var(--blue);
-  color: #ffffff;
-  border-color: var(--blue);
-  box-shadow: 0 6px 22px rgba(11, 59, 114, 0.24);
+  background: linear-gradient(135deg, #10488a 0%, #082d56 100%);
+  border-color: rgba(226, 189, 117, 0.95);
+  box-shadow: 0 8px 26px rgba(11, 59, 114, 0.32), 0 0 14px rgba(212, 175, 55, 0.35);
   transform: translateY(-2px);
+  color: #ffffff;
 }
 
-.directions-button svg {
+.directions-button:active {
+  transform: scale(0.97);
+}
+
+.directions-btn-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: #E8C47A;
   flex-shrink: 0;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.directions-button:hover svg {
-  transform: scale(1.15);
+.directions-button:hover .directions-btn-pin {
+  background: rgba(212, 175, 55, 0.38);
+  color: #FFF2D1;
+  transform: scale(1.08);
+}
+
+.directions-btn-text {
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.directions-btn-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.directions-button:hover .directions-btn-arrow {
+  background: #E8C47A;
+  color: #06294f;
+  transform: translate(2px, -2px);
 }
 
 .occasion a {
@@ -883,50 +968,50 @@ img { display: block; max-width: 100%; }
 .closing-direction-card {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.95rem;
   width: 100%;
-  padding: 0.85rem 1.1rem;
-  border-radius: 0.95rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(239, 247, 252, 0.24);
+  padding: 0.95rem 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(8, 38, 73, 0.88), rgba(4, 25, 50, 0.94));
+  border: 1px solid rgba(212, 175, 55, 0.45);
   color: #eff7fc;
   text-decoration: none;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 
 .closing-direction-card:hover {
-  background: rgba(239, 247, 252, 0.16);
-  border-color: rgba(239, 247, 252, 0.45);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(14, 52, 98, 0.95), rgba(8, 38, 73, 0.98));
+  border-color: rgba(226, 189, 117, 0.85);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42), 0 0 18px rgba(212, 175, 55, 0.3);
   transform: translateY(-2px);
 }
 
 .closing-direction-card:active {
   transform: scale(0.98);
-  background: rgba(239, 247, 252, 0.24);
 }
 
 .closing-direction-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.45rem;
-  height: 2.45rem;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: 999px;
-  background: rgba(239, 247, 252, 0.14);
-  color: #ffffff;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #E8C47A;
   flex-shrink: 0;
-  border: 1px solid rgba(239, 247, 252, 0.28);
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
 .closing-direction-card:hover .closing-direction-icon {
-  transform: scale(1.06);
-  background: rgba(239, 247, 252, 0.22);
+  transform: scale(1.08);
+  background: rgba(212, 175, 55, 0.32);
+  color: #FFF2D1;
 }
 
 .closing-direction-info {
@@ -969,19 +1054,20 @@ img { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 999px;
-  background: rgba(239, 247, 252, 0.1);
-  color: rgba(239, 247, 252, 0.8);
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #E8C47A;
   flex-shrink: 0;
-  border: 1px solid rgba(239, 247, 252, 0.2);
   transition: all 0.25s ease;
 }
 
 .closing-direction-card:hover .closing-direction-arrow-badge {
-  background: #ffffff;
-  color: var(--ink-deep);
+  background: #E8C47A;
+  border-color: #E8C47A;
+  color: #06294f;
   transform: translate(2px, -2px);
 }
 
@@ -1048,8 +1134,8 @@ img { display: block; max-width: 100%; }
   .envelope-card .card-crest-wrap { width: 4.8rem; max-height: 3.2rem; margin-bottom: 0.18rem; }
   .envelope-card .card-kicker { font-size: 0.46rem; letter-spacing: 0.2em; margin-bottom: 0.18rem; }
   .envelope-card .card-names-title { font-size: 1.05rem; letter-spacing: 0.03em; }
-  .envelope-card .card-names-title em { font-size: 1.25rem; }
-  .envelope-card .card-invitation-text { max-width: 15rem; font-size: 0.42rem; line-height: 1.5; margin-top: 0.3rem; }
+  .envelope-card .card-invitation-text { max-width: 100%; margin-top: 0.2rem; gap: 0.08rem; }
+  .card-invitation-line { font-size: clamp(0.32rem, 1.35vw, 0.42rem); letter-spacing: 0.05em; white-space: nowrap; }
   .envelope-card .card-date-plaque { width: min(14rem, 92%); margin-top: 0.4rem; }
   .envelope-card .card-date-plaque strong { font-size: 0.95rem; padding: 0.28rem 0.2rem; }
   .envelope-card .card-date-plaque span { font-size: 0.42rem; padding: 0.28rem 0.2rem; }
@@ -1058,20 +1144,20 @@ img { display: block; max-width: 100%; }
     min-height: 100svh;
     width: 100%;
     max-width: 100vw;
-    padding: 5rem 1.25rem 2.5rem;
+    padding: 2.6rem 1.15rem 1.8rem;
     overflow: visible;
   }
   .hero-floral-tl {
-    top: -0.6rem;
-    left: -0.8rem;
-    width: min(13rem, 48vw);
-    opacity: 0.95;
+    top: -2rem;
+    left: -1.6rem;
+    width: min(11rem, 38vw);
+    opacity: 0.92;
   }
   .hero-floral-tr {
-    top: -0.6rem;
-    right: -0.8rem;
-    width: min(13rem, 48vw);
-    opacity: 0.95;
+    top: -2rem;
+    right: -1.6rem;
+    width: min(11rem, 38vw);
+    opacity: 0.92;
     transform: scaleX(-1);
   }
   .hero-spray-ml {
@@ -1102,29 +1188,29 @@ img { display: block; max-width: 100%; }
     transform: scale(-1);
   }
   .hero-rings-wrap {
-    margin: 0.75rem auto 0.45rem;
+    margin: 0.55rem auto 0.35rem;
   }
   .hero-rings-img {
-    width: min(5.4rem, 24vw);
-    max-height: 3.5rem;
+    width: min(4.8rem, 21vw);
+    max-height: 3.2rem;
   }
-  .hero-top-quote { margin-top: 2.2rem; margin-bottom: 0.75rem; gap: 0.25rem; }
-  .hero-top-quote-text { font-size: 0.92rem; line-height: 1.4; color: #A47324; }
-  .hero-top-quote-source { font-size: 0.6rem; letter-spacing: 0.2em; }
-  .hero-top-quote-divider .quote-line { width: 1.8rem; }
-  .crest-wrap { max-width: 13rem; margin-bottom: 0.8rem; }
-  .crest-emblem-img { width: min(12rem, 58vw); max-height: 8.8rem; }
+  .hero-top-quote { margin-top: 0.8rem; margin-bottom: 0.5rem; gap: 0.2rem; }
+  .hero-top-quote-text { font-size: 0.9rem; line-height: 1.35; color: #9B6B1F; }
+  .hero-top-quote-source { font-size: 0.56rem; letter-spacing: 0.2em; }
+  .hero-top-quote-divider .quote-line { width: 1.6rem; }
+  .crest-wrap { max-width: 11.5rem; margin-bottom: 0.5rem; }
+  .crest-emblem-img { width: min(10.5rem, 52vw); max-height: 7.5rem; }
   .crest { width: 6.2rem; height: 6.2rem; font-size: 1.8rem; }
-  .hero-kicker { font-size: 0.62rem; letter-spacing: 0.22em; margin-bottom: 0.6rem; }
-  .hero h1 { font-size: clamp(1.42rem, 5.6vw, 2.1rem); letter-spacing: 0.03em; }
+  .hero-kicker { font-size: 0.58rem; letter-spacing: 0.22em; margin-bottom: 0.4rem; }
+  .hero h1 { font-size: clamp(1.35rem, 5.2vw, 1.95rem); letter-spacing: 0.03em; gap: 0.15rem; }
   .hero-names-divider { margin-block: 0.1rem; }
   .hero-names-divider .sprig { width: 1.4rem; }
-  .hero h1 em { font-size: 1.85rem; }
-  .hero-invitation { max-width: 19rem; font-size: 0.62rem; line-height: 1.7; margin-top: 0.9rem; }
-  .hero-badges-wrapper { margin-top: 1.15rem; width: 100%; max-width: 100%; }
-  .hero-royal-badges { width: 100%; max-width: min(23.5rem, 100%); gap: 0.5rem; margin-inline: auto; }
-  .hero-royal-badge-reception { width: min(14.5rem, 64%); }
-  .hero-scroll-hint { margin-top: 1.2rem; }
+  .hero-invitation { max-width: 100%; width: 100%; margin-top: 0.65rem; gap: 0.2rem; }
+  .hero-invitation-line { font-size: clamp(0.42rem, 2.25vw, 0.56rem); letter-spacing: clamp(0.04em, 0.28vw, 0.09em); line-height: 1.5; white-space: nowrap; }
+  .hero-badges-wrapper { margin-top: 0.85rem; width: 100%; max-width: 100%; }
+  .hero-royal-badges { width: 100%; max-width: min(22.5rem, 100%); gap: 0.45rem; margin-inline: auto; }
+  .hero-royal-badge-reception { width: min(13.8rem, 62%); }
+  .hero-scroll-hint { margin-top: 0.85rem; }
   .hero-portrait { min-height: 80svh; height: 80svh; }
   .hero-silk { display: none; }
   .section-heading { margin-bottom: 2.5rem; }
@@ -1145,6 +1231,14 @@ img { display: block; max-width: 100%; }
   .closing-silk { width: 46rem; left: -20rem; bottom: -8rem; opacity: 0.18; }
   .family-names { max-width: 18rem; }
   .closing-actions { margin-top: 2rem; width: 100%; max-width: 22rem; }
+  .music-toggle {
+    top: max(0.85rem, env(safe-area-inset-top, 0.85rem));
+    right: max(0.85rem, env(safe-area-inset-right, 0.85rem));
+    width: 2.35rem;
+    height: 2.35rem;
+    border-color: rgba(200, 152, 62, 0.65);
+    background: rgba(6, 41, 79, 0.88);
+  }
 }
 
 @media (prefers-color-scheme: dark) {

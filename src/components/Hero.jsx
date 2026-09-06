@@ -81,7 +81,10 @@ export default function Hero() {
           />
         </motion.div>
 
-        <motion.p {...reveal} transition={{ duration: 0.8, delay: 0.28 }} className="hero-invitation">Together with our families,<br />we invite you to celebrate with us</motion.p>
+        <motion.p {...reveal} transition={{ duration: 0.8, delay: 0.28 }} className="hero-invitation">
+          <span className="hero-invitation-line">Together with our families, we invite you and your family</span>
+          <span className="hero-invitation-line">to grace the Sacrament of Matrimony and join us for the Wedding Reception.</span>
+        </motion.p>
         <motion.div {...reveal} transition={{ duration: 0.8, delay: 0.34 }} className="hero-badges-wrapper">
           <HeroDateBadge />
         </motion.div>
