@@ -230,6 +230,39 @@ export default function HeroDateBadge({ className = '' }) {
           </text>
         </svg>
       </motion.a>
+
+      {/* Reception Venue & Directions */}
+      <motion.div
+        className="hero-venue-block"
+        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.36 }}
+      >
+        <p className="hero-venue-name">Adlux International Convention Center,</p>
+        <p className="hero-venue-city">ANGAMALY</p>
+        <div className="hero-venue-chevron" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <motion.a
+          href="https://maps.app.goo.gl/o31Wgju5P2gMGYuu8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-direction-btn"
+          aria-label="Get Direction to Adlux International Convention Center, Angamaly"
+          whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          <span className="direction-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2a8 8 0 00-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 00-8-8z" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <span>Get Direction</span>
+        </motion.a>
+      </motion.div>
     </div>
   )
 }

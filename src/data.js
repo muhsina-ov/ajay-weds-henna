@@ -61,6 +61,11 @@ export const FAMILY = {
   names: ['Babu George', 'Geena Babu', 'Ajay Babu', 'Anjitha Babu'],
 }
 
+export const CONTACTS = [
+  { name: 'Babu George', phone: '9446216743', tel: '+919446216743' },
+  { name: 'Ajay', phone: '9778599291', tel: '+919778599291' },
+]
+
 const formatCalendarDate = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
 
 export function generateICS() {

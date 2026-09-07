@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { COUPLE, FAMILY, OCCASIONS, generateICS } from '../data'
+import { CONTACTS, COUPLE, FAMILY, OCCASIONS, generateICS } from '../data'
 import AnimatedAsset from './AnimatedAsset'
 
 const GALLERY = [
@@ -59,6 +59,30 @@ export default function Footer() {
           <span>{FAMILY.text}</span>
           <div className="family-names">
             {FAMILY.names.map((name) => <small key={name}>{name}</small>)}
+          </div>
+
+          <div className="closing-contact-block" aria-label="Contact Information">
+            <span className="closing-contact-label">Contact</span>
+            <div className="closing-contact-list">
+              {CONTACTS.map((contact) => (
+                <motion.a
+                  key={contact.name}
+                  href={`tel:${contact.tel}`}
+                  className="closing-contact-item"
+                  title={`Call ${contact.name}: ${contact.phone}`}
+                  whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <span className="contact-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="contact-name">{contact.name}:</span>
+                  <span className="contact-phone">{contact.phone}</span>
+                </motion.a>
+              ))}
+            </div>
           </div>
 
           <div className="closing-actions">

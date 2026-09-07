@@ -560,33 +560,141 @@ img { display: block; max-width: 100%; }
   pointer-events: none;
 }
 
-/* 2 Intertwined Wedding Rings */
+/* 2 Intertwined Wedding Rings (Bigger & Majestic) */
 .hero-rings-wrap {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.2rem auto 0.65rem;
+  margin: 1.4rem auto 0.9rem;
   z-index: 6;
 }
 
 .rings-glow-effect {
   position: absolute;
-  width: 7rem;
-  height: 3.5rem;
+  width: 14.5rem;
+  height: 7.2rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 232, 182, 0.65) 0%, rgba(212, 175, 55, 0.2) 42%, rgba(212, 175, 55, 0) 72%);
-  filter: blur(10px);
+  background: radial-gradient(circle, rgba(247, 232, 182, 0.72) 0%, rgba(212, 175, 55, 0.28) 44%, rgba(212, 175, 55, 0) 75%);
+  filter: blur(14px);
   pointer-events: none;
 }
 
 .hero-rings-img {
-  width: min(6.8rem, 24vw);
+  width: min(13.2rem, 42vw);
   height: auto;
-  max-height: 4.5rem;
+  max-height: 8.5rem;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+}
+
+/* Reception Venue & Directions in Hero */
+.hero-venue-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  text-align: center;
+  z-index: 6;
+}
+
+.hero-venue-name {
+  font-family: var(--display);
+  font-size: clamp(0.74rem, 1.6vw, 0.92rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #0F2449;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.hero-venue-city {
+  font-family: var(--display);
+  font-size: clamp(0.7rem, 1.5vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #0b3b72;
+  text-transform: uppercase;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.hero-venue-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C8983E;
+  margin-bottom: 0.45rem;
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.hero-direction-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.52rem 1.3rem 0.52rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0b3b72 0%, #062447 100%);
+  border: 1px solid rgba(212, 175, 55, 0.75);
+  color: #ffffff;
+  font-family: var(--display);
+  font-size: clamp(0.66rem, 1.35vw, 0.76rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(11, 59, 114, 0.28), 0 2px 6px rgba(212, 175, 55, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.hero-direction-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s ease;
+}
+
+.hero-direction-btn:hover::before {
+  left: 100%;
+}
+
+.hero-direction-btn:hover {
+  background: linear-gradient(135deg, #12498a 0%, #082d56 100%);
+  border-color: rgba(226, 189, 117, 0.95);
+  box-shadow: 0 7px 22px rgba(11, 59, 114, 0.36), 0 0 12px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.hero-direction-btn:active {
+  transform: scale(0.97);
+}
+
+.hero-direction-btn .direction-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #DFB15B;
+  transition: transform 0.25s ease;
+}
+
+.hero-direction-btn:hover .direction-icon {
+  transform: scale(1.15);
 }
 .hero-copy { position: relative; z-index: 5; display: flex; width: min(43rem, 100%); max-width: 100%; flex-direction: column; align-items: center; justify-content: center; padding: 6rem clamp(2rem, 7vw, 8rem); text-align: center; box-sizing: border-box; container-type: inline-size; container-name: herocopy; }
 .hero-top-quote { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; margin-bottom: 1.15rem; text-align: center; position: relative; z-index: 5; }
@@ -864,6 +972,81 @@ img { display: block; max-width: 100%; }
 .closing-frame > span { margin-top: 3rem; font-style: italic; }
 .family-names { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.25rem; margin-top: 1rem; }
 .family-names small { font: 0.58rem var(--display); letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Closing Contacts */
+.closing-contact-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.closing-contact-label {
+  font-family: var(--display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #DFB15B;
+  opacity: 0.95;
+}
+
+.closing-contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.2rem;
+}
+
+.closing-contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.48rem 1.15rem 0.48rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(239, 247, 252, 0.1);
+  border: 1px solid rgba(223, 177, 91, 0.5);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.closing-contact-item:hover {
+  background: rgba(223, 177, 91, 0.2);
+  border-color: rgba(223, 177, 91, 0.9);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.32), 0 0 12px rgba(223, 177, 91, 0.3);
+  color: #ffffff;
+}
+
+.closing-contact-item .contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #DFB15B;
+  flex-shrink: 0;
+}
+
+.closing-contact-item .contact-name {
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+}
+
+.closing-contact-item .contact-phone {
+  font-weight: 500;
+  color: #DFB15B;
+  letter-spacing: 0.1em;
+}
 
 /* Closing Actions - Mobile First */
 .closing-actions {
@@ -1209,11 +1392,15 @@ img { display: block; max-width: 100%; }
     transform: scale(-1);
   }
   .hero-rings-wrap {
-    margin: 0.55rem auto 0.35rem;
+    margin: 0.85rem auto 0.55rem;
   }
   .hero-rings-img {
-    width: min(4.8rem, 21vw);
-    max-height: 3.2rem;
+    width: min(10.2rem, 38vw);
+    max-height: 6.5rem;
+  }
+  .rings-glow-effect {
+    width: 11rem;
+    height: 5.5rem;
   }
   .hero-top-quote { margin-top: 0.8rem; margin-bottom: 0.5rem; gap: 0.2rem; }
   .hero-top-quote-text { font-size: 0.9rem; line-height: 1.35; color: #9B6B1F; }
@@ -1245,6 +1432,10 @@ img { display: block; max-width: 100%; }
   .hero-badges-wrapper { margin-top: 0.85rem; width: 100%; max-width: 100%; }
   .hero-royal-badges { width: 100%; max-width: min(22.5rem, 100%); gap: 0.45rem; margin-inline: auto; }
   .hero-royal-badge-reception { width: min(13.8rem, 62%); }
+  .hero-venue-block { margin-top: 0.55rem; }
+  .hero-venue-name { font-size: clamp(0.68rem, 2.7vw, 0.82rem); }
+  .hero-venue-city { font-size: clamp(0.64rem, 2.5vw, 0.76rem); }
+  .hero-direction-btn { padding: 0.46rem 1.1rem 0.46rem 0.85rem; font-size: 0.65rem; }
   .hero-scroll-hint { margin-top: 0.85rem; }
   .hero-portrait { min-height: 80svh; height: 80svh; }
   .hero-silk { display: none; }
@@ -1265,6 +1456,9 @@ img { display: block; max-width: 100%; }
   .closing-wreath { width: 29rem; opacity: 0.11; }
   .closing-silk { width: 46rem; left: -20rem; bottom: -8rem; opacity: 0.18; }
   .family-names { max-width: 18rem; }
+  .closing-contact-block { margin-top: 1.5rem; }
+  .closing-contact-list { gap: 0.5rem 0.8rem; }
+  .closing-contact-item { padding: 0.42rem 0.9rem 0.42rem 0.75rem; font-size: 0.67rem; }
   .closing-actions { margin-top: 2rem; width: 100%; max-width: 22rem; }
   .music-toggle {
     top: max(0.85rem, env(safe-area-inset-top, 0.85rem));

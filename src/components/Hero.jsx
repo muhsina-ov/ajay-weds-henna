@@ -69,12 +69,12 @@ export default function Hero() {
             alt="Two Intertwined Gold Wedding Rings"
             className="hero-rings-img"
             animate={reduceMotion ? undefined : {
-              y: [0, -4, 0],
-              rotate: [0, 1, 0, -1, 0],
+              y: [0, -5, 0],
+              rotate: [0, 1.2, 0, -1.2, 0],
               filter: [
-                'drop-shadow(0 6px 14px rgba(212, 175, 55, 0.32)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
-                'drop-shadow(0 8px 20px rgba(212, 175, 55, 0.5)) drop-shadow(0 3px 8px rgba(11, 59, 114, 0.18))',
-                'drop-shadow(0 6px 14px rgba(212, 175, 55, 0.32)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
+                'drop-shadow(0 8px 18px rgba(212, 175, 55, 0.42)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
+                'drop-shadow(0 12px 28px rgba(212, 175, 55, 0.62)) drop-shadow(0 4px 10px rgba(11, 59, 114, 0.18))',
+                'drop-shadow(0 8px 18px rgba(212, 175, 55, 0.42)) drop-shadow(0 2px 6px rgba(11, 59, 114, 0.12))',
               ]
             }}
             transition={reduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
