@@ -6,9 +6,6 @@ const TOP_OUTER_PATH =
 const TOP_INNER_PATH =
   'M 49,6 H 581 V 14 H 591 V 22 C 593,36 612,52 620,63 C 612,74 593,90 591,104 V 112 H 581 V 120 H 49 V 112 H 39 V 104 C 37,90 18,74 10,63 C 18,52 37,36 39,22 V 14 H 49 V 6 Z'
 
-const BOTTOM_PATH =
-  'M 28,2 H 312 V 8 H 320 V 14 C 322,24 330,34 336,42 C 330,50 322,60 320,70 V 76 H 312 V 82 H 28 V 76 H 20 V 70 C 18,60 10,50 4,42 C 10,34 18,24 20,14 V 8 H 28 V 2 Z'
-
 export default function HeroDateBadge({ className = '' }) {
   const reduceMotion = useReducedMotion()
 
@@ -165,104 +162,19 @@ export default function HeroDateBadge({ className = '' }) {
         </svg>
       </motion.div>
 
-      {/* Bottom Reception Plaque */}
-      <motion.a
-        href="#details"
-        className="hero-royal-badge hero-royal-badge-reception"
-        whileHover={reduceMotion ? undefined : { scale: 1.028, y: -2 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
-        title="Reception: 6:30 PM Onwards - Click to view venue & event details"
+      <a
+        href="https://maps.app.goo.gl/o31Wgju5P2gMGYuu8"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="invitation-reception"
+        aria-label="Get directions to Adlux International Convention Center, Angamaly"
       >
-        <svg
-          viewBox="0 0 340 84"
-          className="royal-badge-svg"
-          aria-hidden="true"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            <linearGradient id="receptionNavy" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#172248" />
-              <stop offset="100%" stopColor="#0E1632" />
-            </linearGradient>
-
-            <filter id="receptionShadow" x="-10%" y="-15%" width="120%" height="135%">
-              <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#061830" floodOpacity="0.25" />
-            </filter>
-          </defs>
-
-          <g filter="url(#receptionShadow)">
-            <path
-              d={BOTTOM_PATH}
-              fill="url(#receptionNavy)"
-              stroke="url(#badgeGold)"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-          </g>
-
-          {/* Header: RECEPTION */}
-          <text
-            x="170"
-            y="33"
-            textAnchor="middle"
-            fill="#DFB15B"
-            fontFamily="Cinzel, Georgia, serif"
-            fontSize="14"
-            fontWeight="700"
-            letterSpacing="3.4"
-          >
-            RECEPTION
-          </text>
-
-          {/* Time: 6:30 PM Onwards */}
-          <text
-            x="170"
-            y="58"
-            textAnchor="middle"
-            fill="#FFFFFF"
-            fontFamily="'Playfair Display', Georgia, serif"
-            fontSize="18.5"
-            fontWeight="700"
-            letterSpacing="0.4"
-          >
-            6:30 PM Onwards
-          </text>
-        </svg>
-      </motion.a>
-
-      {/* Reception Venue & Directions */}
-      <motion.div
-        className="hero-venue-block"
-        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.36 }}
-      >
-        <p className="hero-venue-name">Adlux International Convention Center,</p>
-        <p className="hero-venue-city">ANGAMALY</p>
-        <div className="hero-venue-chevron" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <motion.a
-          href="https://maps.app.goo.gl/o31Wgju5P2gMGYuu8"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-direction-btn"
-          aria-label="Get Direction to Adlux International Convention Center, Angamaly"
-          whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          <span className="direction-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 2a8 8 0 00-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 00-8-8z" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-          </span>
-          <span>Get Direction</span>
-        </motion.a>
-      </motion.div>
+        <span className="invitation-reception-label">Reception</span>
+        <span className="invitation-reception-time">6:30 PM Onwards</span>
+        <span className="invitation-reception-rule" aria-hidden="true">◆</span>
+        <span className="invitation-reception-venue">Adlux International<br />Convention Center,</span>
+        <span className="invitation-reception-city">Angamaly</span>
+      </a>
     </div>
   )
 }
