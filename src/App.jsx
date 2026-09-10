@@ -4,6 +4,7 @@ import EnvelopeReveal from './components/EnvelopeReveal'
 import Hero from './components/Hero'
 import WhenWhere from './components/WhenWhere'
 import Story from './components/Story'
+import VideoSection from './components/VideoSection'
 import Footer from './components/Footer'
 import MusicPlayer from './components/MusicPlayer'
 
@@ -39,6 +40,7 @@ export default function App() {
             <Hero />
             <WhenWhere />
             <Story />
+            <VideoSection />
             <Footer />
           </motion.main>
         )}
