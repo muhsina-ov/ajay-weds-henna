@@ -203,8 +203,10 @@ export default function EnvelopeReveal({ onOpen }) {
 
                 {/* Invitation Text */}
                 <p className="card-invitation-text">
-                  <span className="card-invitation-line">Together with our families, we invite you and your family</span>
-                  <span className="card-invitation-line">to grace the Sacrament of Matrimony and join us for the Wedding Reception.</span>
+                  <span className="card-invitation-line">Together with our families,</span>
+                  <span className="card-invitation-line">we invite you to witness our Sacrament of Matrimony</span>
+                  <span className="card-invitation-amp">&amp;</span>
+                  <span className="card-invitation-line">join us for our Wedding Reception.</span>
                 </p>
 
                 {/* Date Plaque */}

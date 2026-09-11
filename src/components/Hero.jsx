@@ -26,8 +26,9 @@ export default function Hero() {
         <div className="hero-rings-wrap"><img src="/assets/decorations/wedding-rings.webp" alt="Two intertwined gold wedding rings" className="hero-rings-img" /></div>
         <p className="hero-invitation">
           <span className="hero-invitation-line">Together with our families,</span>
-          <span className="invitation-script">we invite you to the Reception</span>
-          <span className="hero-invitation-line">to grace the Sacrament of Matrimony and<br />join us for the Wedding Reception.</span>
+          <span className="hero-invitation-line">we invite you to witness our Sacrament of Matrimony</span>
+          <span className="invitation-script">&amp;</span>
+          <span className="hero-invitation-line">join us for our Wedding Reception.</span>
         </p>
         <div className="invitation-divider" aria-hidden="true"><span />❦<span /></div>
         <div className="hero-badges-wrapper"><HeroDateBadge /></div>
