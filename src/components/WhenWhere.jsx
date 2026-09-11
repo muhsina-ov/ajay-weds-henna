@@ -1,27 +1,10 @@
-import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { CEREMONY_DATE, OCCASIONS, generateICS } from '../data'
+import { OCCASIONS } from '../data'
 import AnimatedAsset from './AnimatedAsset'
 import { ChurchSilhouette, ConventionCentreSilhouette } from './Decorations'
 
-function getTimeLeft() {
-  const difference = Math.max(0, CEREMONY_DATE.getTime() - Date.now())
-  return {
-    days: Math.floor(difference / 86400000),
-    hours: Math.floor((difference / 3600000) % 24),
-    minutes: Math.floor((difference / 60000) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  }
-}
-
 export default function WhenWhere() {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft)
   const reduceMotion = useReducedMotion()
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setTimeLeft(getTimeLeft()), 1000)
-    return () => window.clearInterval(timer)
-  }, [])
 
   return (
     <section className="occasion-section" id="details" aria-labelledby="occasion-heading">
@@ -83,13 +66,6 @@ export default function WhenWhere() {
         ))}
       </div>
 
-      <motion.button className="calendar-button" type="button" onClick={generateICS} whileHover={reduceMotion ? undefined : { scale: 1.025 }} whileTap={{ scale: 0.97 }}>Add both events to calendar</motion.button>
-
-      <div className="countdown" aria-label="Countdown to the wedding ceremony">
-        {Object.entries(timeLeft).map(([label, value]) => (
-          <motion.div key={label} initial={reduceMotion ? false : { opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: Object.keys(timeLeft).indexOf(label) * 0.08 }}><strong>{String(value).padStart(2, '0')}</strong><span>{label}</span></motion.div>
-        ))}
-      </div>
       <AnimatedAsset className="occasion-corner" src="/assets/florals/grand-corner.webp" from="right" delay={0.2} drift={9} duration={9} />
     </section>
   )

@@ -31,15 +31,16 @@ export default function VideoSection() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="video-kicker">Save The Date · Celebration</span>
+          <span className="video-kicker">Save The Date</span>
           <h2 id="video-title" className="video-heading">
-            Moments in <em>Motion</em>
+            A Prelude To Forever
           </h2>
+          <p className="video-subtitle">The Story of Ajay &amp; Henna</p>
           <div className="invitation-divider" aria-hidden="true">
             <span />❦<span />
           </div>
           <p className="video-description">
-            A glimpse into the joy, laughter, and timeless promises of our journey together.
+            A glimpse into the laughter, love, and beautiful memories that make our story special.
           </p>
         </motion.div>
 

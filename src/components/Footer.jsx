@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { CONTACTS, COUPLE, FAMILY, OCCASIONS, generateICS } from '../data'
+import { CEREMONY_DATE, CONTACTS, COUPLE, FAMILY, OCCASIONS, generateICS } from '../data'
 import AnimatedAsset from './AnimatedAsset'
 
 const GALLERY = [
@@ -11,8 +12,24 @@ const GALLERY = [
   '/assets/gallery-6.webp',
 ]
 
+function getTimeLeft() {
+  const difference = Math.max(0, CEREMONY_DATE.getTime() - Date.now())
+  return {
+    days: Math.floor(difference / 86400000),
+    hours: Math.floor((difference / 3600000) % 24),
+    minutes: Math.floor((difference / 60000) % 60),
+    seconds: Math.floor((difference / 1000) % 60),
+  }
+}
+
 export default function Footer() {
   const reduceMotion = useReducedMotion()
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    return () => window.clearInterval(timer)
+  }, [])
 
   return (
     <>
@@ -56,6 +73,43 @@ export default function Footer() {
           <p>With Love &amp; Joy</p>
           <h2>{COUPLE.groomShort} <em>&amp;</em> {COUPLE.brideShort}</h2>
           <strong>04 October 2026</strong>
+
+          {/* Royal Highlighted Countdown & Calendar Card */}
+          <div className="closing-countdown-card" aria-label="Countdown to the wedding ceremony">
+            <span className="closing-countdown-kicker">Counting Down To Our Big Day</span>
+            <div className="closing-countdown-divider" aria-hidden="true">
+              <span />❦<span />
+            </div>
+
+            <div className="closing-countdown-grid">
+              {Object.entries(timeLeft).map(([label, value]) => (
+                <div key={label} className="closing-countdown-col">
+                  <span className="closing-countdown-val">{String(value).padStart(2, '0')}</span>
+                  <span className="closing-countdown-lbl">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <motion.button
+              type="button"
+              className="closing-countdown-btn"
+              onClick={generateICS}
+              whileTap={{ scale: 0.97 }}
+              whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <span>Add Both Events to Calendar</span>
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </motion.button>
+          </div>
+
           <span>{FAMILY.text}</span>
           <div className="family-names">
             {FAMILY.names.map((name) => <small key={name}>{name}</small>)}
@@ -86,21 +140,6 @@ export default function Footer() {
           </div>
 
           <div className="closing-actions">
-            <motion.button
-              type="button"
-              className="closing-btn-calendar"
-              onClick={generateICS}
-              whileTap={{ scale: 0.97 }}
-              whileHover={reduceMotion ? undefined : { scale: 1.02 }}
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                <line x1="16" y1="2" x2="16" y2="6" />
-                <line x1="8" y1="2" x2="8" y2="6" />
-                <line x1="3" y1="10" x2="21" y2="10" />
-              </svg>
-              <span>Add to Calendar</span>
-            </motion.button>
 
             <div className="closing-directions-block">
               <div className="closing-directions-heading">

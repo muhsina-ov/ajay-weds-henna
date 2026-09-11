@@ -35,7 +35,8 @@ export const OCCASIONS = [
 ]
 
 export const STORY = {
-  title: 'Two Journeys · One Story',
+  title: 'Where Two Stories Meet',
+  subtitle: 'The Story of Ajay & Henna',
   bride: {
     name: 'Henna',
     role: 'The Bride',

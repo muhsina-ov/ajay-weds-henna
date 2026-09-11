@@ -111,8 +111,8 @@ export default function EnvelopeReveal({ onOpen }) {
     // Phase 2: Flap opened, card begins rising out of envelope pocket
     timers.current.push(window.setTimeout(() => setPhase('unfolded'), 340))
 
-    // Phase 3: Immediate transition to hero once rising finishes (340ms + 680ms = ~1020ms)
-    timers.current.push(window.setTimeout(() => finishReveal(), 1050))
+    // Phase 3: Transition to hero after card has risen and can be read (~3s total, or click anytime to skip)
+    timers.current.push(window.setTimeout(() => finishReveal(), 3000))
   }
 
   const isFlapOpen = phase !== 'sealed'
@@ -152,69 +152,32 @@ export default function EnvelopeReveal({ onOpen }) {
                 <div className="envelope-pocket-shadow" />
               </div>
 
-              {/* The Letter Card Inside (rises gracefully and prompts hero section on completion) */}
+              {/* The Letter Card Inside (rises gracefully and reveals the royal wedding invitation) */}
               <motion.div
                 className="envelope-card"
                 initial={false}
                 animate={
                   isCardOut
-                    ? { y: '-78%', scale: 1.025, rotateZ: -0.05 }
+                    ? { y: '-80%', scale: 1.025, rotateZ: -0.05 }
                     : { y: '0%', scale: 1, rotateZ: 0 }
                 }
                 transition={{
-                  duration: 0.68,
+                  duration: 0.72,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                onAnimationComplete={() => {
-                  if (isCardOut) {
-                    finishReveal()
-                  }
-                }}
               >
-                <div className="card-border-frame" />
-
-                {/* Crest Monogram */}
-                <div className="card-crest-wrap">
+                <picture className="card-artwork-picture">
+                  <source srcSet="/assets/decorations/wedding-letter-card.webp" type="image/webp" />
                   <img
-                    src="/assets/florals/crest-monogram.webp"
-                    alt="Ajay and Henna Monogram"
-                    className="card-crest-img"
+                    src="/assets/decorations/wedding-letter-card.png"
+                    alt="Wedding Invitation: Together with their families, Ajay Babu unites in heart and soul with Henna Prathap, Sunday, October 4, 2026"
+                    className="card-artwork-img"
+                    width="1800"
+                    height="1200"
+                    loading="eager"
+                    decoding="sync"
                   />
-                </div>
-
-                {/* Kicker */}
-                <p className="card-kicker">With Love &amp; Joy</p>
-
-                {/* Names */}
-                <h2 className="card-names-title">
-                  <span>Ajay Babu</span>
-                  <em>&amp;</em>
-                  <span>Henna Prathap</span>
-                </h2>
-
-                {/* 2 Wedding Rings */}
-                <div className="card-rings-wrap">
-                  <img
-                    src="/assets/decorations/wedding-rings.webp"
-                    alt="Two Wedding Rings"
-                    className="card-rings-img"
-                  />
-                </div>
-
-                {/* Invitation Text */}
-                <p className="card-invitation-text">
-                  <span className="card-invitation-line">Together with our families,</span>
-                  <span className="card-invitation-line">we invite you to witness our Sacrament of Matrimony</span>
-                  <span className="card-invitation-amp">&amp;</span>
-                  <span className="card-invitation-line">join us for our Wedding Reception.</span>
-                </p>
-
-                {/* Date Plaque */}
-                <div className="card-date-plaque">
-                  <strong>04</strong>
-                  <span>October</span>
-                  <strong>2026</strong>
-                </div>
+                </picture>
               </motion.div>
 
               {/* Front Pocket Flaps (Left, Right, Bottom with rich paper grain & gold foil bevel) */}

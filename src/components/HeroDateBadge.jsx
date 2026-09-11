@@ -1,10 +1,72 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { OCCASIONS } from '../data'
 
 const TOP_OUTER_PATH =
   'M 45,3 H 585 V 11 H 595 V 19 C 597,34 618,51 626,63 C 618,75 597,92 595,107 V 115 H 585 V 123 H 45 V 115 H 35 V 107 C 33,92 12,75 4,63 C 12,51 33,34 35,19 V 11 H 45 V 3 Z'
 
 const TOP_INNER_PATH =
   'M 49,6 H 581 V 14 H 591 V 22 C 593,36 612,52 620,63 C 612,74 593,90 591,104 V 112 H 581 V 120 H 49 V 112 H 39 V 104 C 37,90 18,74 10,63 C 18,52 37,36 39,22 V 14 H 49 V 6 Z'
+
+function ChurchIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 2v4M10 4h4" />
+      <path d="M18 22H6a1.5 1.5 0 0 1-1.5-1.5V11l7.5-5.5 7.5 5.5v9.5A1.5 1.5 0 0 1 18 22z" />
+      <path d="M10 22v-5a2 2 0 0 1 4 0v5" />
+    </svg>
+  )
+}
+
+function ConventionIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M3 21h18M3 8h18" />
+      <path d="M12 3L2 8h20L12 3z" />
+      <line x1="6" y1="8" x2="6" y2="21" />
+      <line x1="10" y1="8" x2="10" y2="21" />
+      <line x1="14" y1="8" x2="14" y2="21" />
+      <line x1="18" y1="8" x2="18" y2="21" />
+    </svg>
+  )
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M7 17L17 7M17 7H7M17 7V17" />
+    </svg>
+  )
+}
 
 export default function HeroDateBadge({ className = '' }) {
   const reduceMotion = useReducedMotion()
@@ -162,19 +224,53 @@ export default function HeroDateBadge({ className = '' }) {
         </svg>
       </motion.div>
 
-      <a
-        href="https://maps.app.goo.gl/o31Wgju5P2gMGYuu8"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="invitation-reception"
-        aria-label="Get directions to Adlux International Convention Center, Angamaly"
-      >
+      {/* Reception Plaque Card */}
+      <div className="invitation-reception">
         <span className="invitation-reception-label">Reception</span>
         <span className="invitation-reception-time">6:30 PM Onwards</span>
         <span className="invitation-reception-rule" aria-hidden="true">◆</span>
         <span className="invitation-reception-venue">Adlux International<br />Convention Center,</span>
         <span className="invitation-reception-city">Angamaly</span>
-      </a>
+      </div>
+
+      {/* Directions Actions - Two Options: Church & Convention */}
+      <div className="hero-directions-group">
+        <motion.a
+          href={OCCASIONS[0].mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-direction-pill hero-direction-church"
+          aria-label="Get direction to Church (Little Flower Syro-Malabar Church, Kurumassery)"
+          whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          <span className="hero-direction-icon">
+            <ChurchIcon />
+          </span>
+          <span className="hero-direction-text">Get Direction Church</span>
+          <span className="hero-direction-arrow">
+            <ArrowIcon />
+          </span>
+        </motion.a>
+
+        <motion.a
+          href={OCCASIONS[1].mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-direction-pill hero-direction-convention"
+          aria-label="Get direction to Convention Center (Adlux International Convention Centre, Angamaly)"
+          whileHover={reduceMotion ? undefined : { scale: 1.03, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          <span className="hero-direction-icon">
+            <ConventionIcon />
+          </span>
+          <span className="hero-direction-text">Get Direction Convention</span>
+          <span className="hero-direction-arrow">
+            <ArrowIcon />
+          </span>
+        </motion.a>
+      </div>
     </div>
   )
 }

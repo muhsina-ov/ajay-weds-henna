@@ -21,6 +21,7 @@ export default function Story() {
       <motion.div className="story-copy" initial={reduceMotion ? false : { opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.75, delay: 0.1 }}>
         <span className="story-monogram"><img src="/assets/florals/open-wreath.webp" alt="" />A <i /> H</span>
         <h2 id="story-heading">{STORY.title}</h2>
+        {STORY.subtitle && <p className="story-subtitle">{STORY.subtitle}</p>}
 
         <div className="story-profile story-profile-henna">
           <div className="story-profile-header">
