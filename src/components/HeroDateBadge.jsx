@@ -7,6 +7,12 @@ const TOP_OUTER_PATH =
 const TOP_INNER_PATH =
   'M 49,6 H 581 V 14 H 591 V 22 C 593,36 612,52 620,63 C 612,74 593,90 591,104 V 112 H 581 V 120 H 49 V 112 H 39 V 104 C 37,90 18,74 10,63 C 18,52 37,36 39,22 V 14 H 49 V 6 Z'
 
+const RECEPTION_OUTER_PATH =
+  'M 434,25 H 696 C 709,25 720,33 724,45.5 H 740 C 752,45.5 762,58 762,73.5 H 774 C 785,84 795,98 795,115 V 125 C 800,150 822,182 842.5,200 C 822,218 800,250 795,275 V 285 C 795,302 785,316 774,322.5 H 762 C 762,342 752,354.5 740,354.5 H 724 C 720,367 709,375 696,375 H 434 H 172 C 159,375 148,367 144,354.5 H 128 C 116,354.5 106,342 106,322.5 H 94 C 83,316 73,302 73,285 V 275 C 68,250 46,218 25.5,200 C 46,182 68,150 73,125 V 115 C 73,98 83,84 94,77.5 H 106 C 106,58 116,45.5 128,45.5 H 144 C 148,33 159,25 172,25 Z'
+
+const RECEPTION_INNER_PATH =
+  'M 434,34.5 H 689 C 701,34.5 712,42 716,54.5 H 732 C 743,54.5 753,66 753,79.5 H 765 C 775,90 785,102 785,118 V 126 C 790,150 811,182 831.5,199.5 C 811,217 790,249 785,273 V 281 C 785,297 775,309 765,319.5 H 753 C 753,333 743,344.5 732,344.5 H 716 C 712,357 701,364.5 689,364.5 H 434 H 179 C 167,364.5 156,357 152,344.5 H 136 C 125,344.5 115,333 115,319.5 H 103 C 93,309 83,297 83,281 V 273 C 78,249 57,217 36.5,199.5 C 57,182 78,150 83,126 V 118 C 83,102 93,90 103,79.5 H 115 C 115,66 125,54.5 136,54.5 H 152 C 156,42 167,34.5 179,34.5 Z'
+
 function ChurchIcon() {
   return (
     <svg
@@ -224,14 +230,135 @@ export default function HeroDateBadge({ className = '' }) {
         </svg>
       </motion.div>
 
-      {/* Reception Plaque Card */}
-      <div className="invitation-reception">
-        <span className="invitation-reception-label">Reception</span>
-        <span className="invitation-reception-time">6:30 PM Onwards</span>
-        <span className="invitation-reception-rule" aria-hidden="true">◆</span>
-        <span className="invitation-reception-venue">Adlux International<br />Convention Center,</span>
-        <span className="invitation-reception-city">Angamaly</span>
-      </div>
+      {/* Reception Royal Plaque Card */}
+      <motion.div
+        className="hero-royal-badge hero-royal-badge-reception"
+        whileHover={reduceMotion ? undefined : { scale: 1.012, y: -2 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
+        <svg
+          viewBox="0 0 868 400"
+          className="royal-badge-svg royal-badge-reception-svg"
+          aria-hidden="true"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <linearGradient id="receptionGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#C8983E" />
+              <stop offset="35%" stopColor="#E5C17B" />
+              <stop offset="70%" stopColor="#C8983E" />
+              <stop offset="100%" stopColor="#9B6C24" />
+            </linearGradient>
+
+            <linearGradient id="receptionIvory" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.98" />
+              <stop offset="50%" stopColor="#FAF5E8" stopOpacity="0.96" />
+              <stop offset="100%" stopColor="#F5EFE0" stopOpacity="0.94" />
+            </linearGradient>
+
+            <filter id="receptionShadow" x="-8%" y="-15%" width="116%" height="135%">
+              <feDropShadow dx="0" dy="5" stdDeviation="7" floodColor="#0b294f" floodOpacity="0.10" />
+            </filter>
+          </defs>
+
+          {/* Cartouche Frames */}
+          <g filter="url(#receptionShadow)">
+            <path
+              d={RECEPTION_OUTER_PATH}
+              fill="url(#receptionIvory)"
+              stroke="url(#receptionGold)"
+              strokeWidth="2.6"
+              strokeLinejoin="round"
+            />
+            <path
+              d={RECEPTION_INNER_PATH}
+              fill="none"
+              stroke="url(#receptionGold)"
+              strokeWidth="1.4"
+              strokeLinejoin="round"
+              strokeOpacity="0.92"
+            />
+          </g>
+
+          {/* RECEPTION */}
+          <text
+            x="434"
+            y="87"
+            textAnchor="middle"
+            fill="#0F2449"
+            fontFamily="'Cinzel', Georgia, serif"
+            fontSize="22"
+            fontWeight="600"
+            letterSpacing="5"
+          >
+            RECEPTION
+          </text>
+
+          {/* 6:30 PM Onwards */}
+          <text
+            x="434"
+            y="143"
+            textAnchor="middle"
+            fill="#0F2449"
+            fontFamily="'Playfair Display', Georgia, serif"
+            fontSize="37"
+            fontWeight="600"
+            letterSpacing="0.6"
+          >
+            6:30 PM Onwards
+          </text>
+
+          {/* Divider with Center Diamond */}
+          <rect x="170" y="173.25" width="244" height="1.5" fill="url(#receptionGold)" />
+          <polygon points="434,163 445,174 434,185 423,174" fill="url(#receptionGold)" />
+          <rect x="454" y="173.25" width="244" height="1.5" fill="url(#receptionGold)" />
+
+          {/* ADLUX INTERNATIONAL CONVENTION CENTER, */}
+          <text
+            x="434"
+            y="228"
+            textAnchor="middle"
+            fill="#0F2449"
+            fontFamily="'Cinzel', Georgia, serif"
+            fontSize="24"
+            fontWeight="600"
+            letterSpacing="2.6"
+          >
+            ADLUX INTERNATIONAL
+          </text>
+          <text
+            x="434"
+            y="273"
+            textAnchor="middle"
+            fill="#0F2449"
+            fontFamily="'Cinzel', Georgia, serif"
+            fontSize="24"
+            fontWeight="600"
+            letterSpacing="2.6"
+          >
+            CONVENTION CENTER,
+          </text>
+
+          {/* ANGAMALY */}
+          <text
+            x="434"
+            y="323"
+            textAnchor="middle"
+            fill="#0F2449"
+            fontFamily="'Cinzel', Georgia, serif"
+            fontSize="17.5"
+            fontWeight="600"
+            letterSpacing="7"
+          >
+            ANGAMALY
+          </text>
+        </svg>
+
+        {/* Accessible screen reader text */}
+        <span className="sr-only">
+          Reception: 6:30 PM Onwards at Adlux International Convention Center, Angamaly
+        </span>
+      </motion.div>
 
       {/* Directions Actions - Two Options: Church & Convention */}
       <div className="hero-directions-group">

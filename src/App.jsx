@@ -39,8 +39,8 @@ export default function App() {
           >
             <Hero />
             <WhenWhere />
-            <Story />
             <VideoSection />
+            <Story />
             <Footer />
           </motion.main>
         )}
